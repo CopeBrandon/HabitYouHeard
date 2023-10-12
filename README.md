@@ -73,4 +73,4 @@ and it will run, deploying the react side of the project. It should open the pag
 To stop running the project, press ctrl+c in the terminal or close it.
 
 # Clean Up
-If you wish to clean up the project after having installed it, make sure that you uninstall MySQL Workbench(it uses resources when not being used) and delete all project files. Easy as.
+If you wish to clean up the project after having installed it, make sure that you uninstall MySQL Workbench (it uses resources when not being used) and delete all project files. Easy as.
