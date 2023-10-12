@@ -43,6 +43,7 @@ public class AuthenticationController {
                 responseBody.put("email" , user.getEmail());
                 responseBody.put("username", user.getUsername());
                 responseBody.put("points", String.valueOf(user.getPoints()));
+                responseBody.put("darkMode", String.valueOf(user.isDarkMode()));
 
                 userRepository.save(user);
                 return new ResponseEntity<>(responseBody, HttpStatus.OK);

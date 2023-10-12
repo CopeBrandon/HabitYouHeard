@@ -2,7 +2,6 @@ import React from "react";
 import { Outlet } from "react-router";
 
 function AuthBackground(props) {
-  console.log(props);
   return (
     <div
       style={{

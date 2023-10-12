@@ -1,4 +1,4 @@
-package com.habityouheard.habityouheard.controllers;
+package com.habityouheard.habityouheard.Controllers;
 
 import com.habityouheard.habityouheard.models.Habit;
 import com.habityouheard.habityouheard.models.User;
@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
+
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.Optional;
 
@@ -17,6 +20,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/user")
 public class UserController {
+    @Autowired
+    EntityManager entityManager;
 
     @Autowired
     private UserRepository userRepository;
@@ -46,6 +51,25 @@ public class UserController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @Transactional
+    @PostMapping("darkmode")
+    public ResponseEntity<Boolean> setDarkMode(@RequestHeader(value="Authorization") String authToken) {
+        if(authToken == null){
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        Optional<User> userReference = userRepository.findByAuthToken(authToken);
+
+        if(!userReference.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        User user = (User) userReference.get();
+        user.flipDarkMode();
+        System.out.println(user.isDarkMode());
+        entityManager.persist(user);
+        entityManager.flush();
+        return new ResponseEntity<>(user.isDarkMode(), HttpStatus.OK);
     }
 }
 

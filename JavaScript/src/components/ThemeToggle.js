@@ -10,7 +10,6 @@ const StyledIcon = styled(IconButton)(({theme}) => ({
   }));
 
 const ThemeToggle = (props) => {
-    
     return (
         <StyledIcon id='dark-mode' onClick={() => props.onToggleTheme()}>
             {props.darkMode ? <Brightness7Icon /> : <Brightness4Icon />}

@@ -14,10 +14,22 @@ import YourProgress from "./pages/YourProgress";
 function App() {
   const [user, setUser] = useState(localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {token: ""});
   const [habits, setHabits] = useState([]);
-
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(user.darkMode? user.darkMode : false);
+  
   const handleToggleTheme = () => {
-    setDarkMode(!darkMode);
+    fetch(`http://localhost:8080/api/user/darkmode`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: user.token,
+      }
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        user.darkMode = data;
+        setDarkMode(user.darkMode);
+        localStorage.setItem("user", JSON.stringify(user));
+      })
   };
   const theme = createTheme({
     palette: {
@@ -91,7 +103,7 @@ function App() {
             />
           </Route>
           <Route path="/auth" element={<AuthBackground />}>
-            <Route path="signin" element={<SignIn setUser={setUser} user={user} habits={habits} />} />
+            <Route path="signin" element={<SignIn setUser={setUser} user={user} habits={habits} setDarkMode={setDarkMode}/>} />
             <Route path="signup" title={SignUp.title} element={<SignUp />} />
           </Route>
         </Routes>

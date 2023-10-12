@@ -14,7 +14,6 @@ let daysCheckArray = [
 
 function DataConversion(habits) {
   let eventsArray = [];
-  console.log("habits", habits);
   habits.map((habit) => {
 
     let nextDay;
@@ -32,7 +31,6 @@ function DataConversion(habits) {
       })
       
     })
-    console.log("next day", nextDay, habit);
     eventsArray.push({
       startRecur: nextDay ? nextDay : habit.startDate,
       title: habit.name,
@@ -41,7 +39,6 @@ function DataConversion(habits) {
       })
     })
   })
-  console.log("events array", eventsArray);
   return eventsArray;
 }
 
