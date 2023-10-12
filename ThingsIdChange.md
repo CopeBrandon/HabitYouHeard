@@ -1,0 +1,11 @@
+# Things I'd Change
+- The styling of the front page seems barren without many habits.
+- Allow you to click in the calendar to change a habit meta.
+- Maybe allow you to pull up a list of habit meta?
+- Change password.
+- Styling of dark mode is rough. The baby blue color is harsh.
+- Badges page scroll off edge issue. I think it's caused by the navbar fragment.
+- Navbar title "Hello, ..." needs some buffer.
+- Forgot password feature.
+- Finish email feature. Needs formatting, and a page or button.
+- Calendar styling. Today button is lower case??? Make it smaller on the page with some padding.
