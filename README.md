@@ -9,7 +9,10 @@ Created by Micah Young, Raven Almira, Stève Levillain, Eric Smith, and Brandon 
 In order to view this project you need: Java, JavaScript, npm, an IDE that has runtime integration, and an open mind.
 
 Use the following command in a directory you wish to install the project.  
-&nbsp;&nbsp;&nbsp;&nbsp;```git clone https://github.com/CopeBrandon/HabitYouHeard.git```
+&nbsp;&nbsp;&nbsp;&nbsp;
+```
+git clone https://github.com/CopeBrandon/HabitYouHeard.git
+```
 
 ### `Java`
 In order to install Java follow these instructions: [freecodecamp](https://www.freecodecamp.org/news/how-to-install-java-on-windows/). Install and use Java version 17.
@@ -20,7 +23,11 @@ Download a version of MySQL Workbench that has server functionality(the non-web,
 ### `JavaScript & React`
 Make sure that you have npm [installed](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
-After instaling npm, route to the `Javascript` directory and run the command "npm install" to install the required dependencies. May take a while, sorry. :)
+After instaling npm, route to the `Javascript` directory and run the command 
+```
+npm install
+```
+to install the required dependencies. May take a while, sorry. :)
 
 ---
 After all of this you should have your project installed and ready for...
