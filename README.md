@@ -2,7 +2,7 @@
 [INSERT LOVELY DESCRIPTION OF IT HERE WOO]
 
 Original project: [back-end](https://github.com/Jul-2022-LC-LiftOff/HabitYouHeard), [front-end](https://github.com/Jul-2022-LC-LiftOff/Habit-You-Heard-Frontend).  
-Created by Micah Young, Raven Rydela, Stève Levillain, Eric Smith, and Brandon Cope. This is Brandon's fork of the project.
+Created by Micah Young, Raven Almira, Stève Levillain, Eric Smith, and Brandon Cope. This is Brandon's fork of the project.
 
 
 ## Installation
