@@ -1,4 +1,4 @@
-package com.habityouheard.habityouheard.Controllers;
+package com.habityouheard.habityouheard.controllers;
 
 import com.habityouheard.habityouheard.models.User;
 import com.habityouheard.habityouheard.repositories.UserRepository;
@@ -43,6 +43,7 @@ public class AuthenticationController {
                 responseBody.put("email" , user.getEmail());
                 responseBody.put("username", user.getUsername());
                 responseBody.put("points", String.valueOf(user.getPoints()));
+                responseBody.put("darkMode", String.valueOf(user.isDarkMode()));
 
                 userRepository.save(user);
                 return new ResponseEntity<>(responseBody, HttpStatus.OK);

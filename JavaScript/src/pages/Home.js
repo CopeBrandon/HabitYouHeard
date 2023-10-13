@@ -18,7 +18,6 @@ const StyledDiv = styled("div")(() => ({
 
 
 export default function Home({ habits, setHabits, onToggleTheme, user, setUser, darkMode}) {
-
   const current = new Date();
   const date = `${
     current.getMonth() + 1
@@ -30,9 +29,9 @@ export default function Home({ habits, setHabits, onToggleTheme, user, setUser, 
 
   function handleSignout(){
     setUser({token: ""})
+    onToggleTheme(true);
     setHabits([])
     navigate("/auth/signin")
-    
   }
   const navigate = useNavigate();
 

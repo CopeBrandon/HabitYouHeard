@@ -9,3 +9,6 @@
 - Forgot password feature.
 - Finish email feature. Needs formatting, and a page or button.
 - Calendar styling. Today button is lower case??? Make it smaller on the page with some padding.
+- dark mode stored in user preferences
+- useEffect causes error when called before user is stated.
+- Clamp width of tooltip on habit description if it gets too long. Maybe force a maximum size?

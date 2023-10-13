@@ -34,6 +34,8 @@ public class User {
 
     private int points;
 
+    private boolean darkMode = false;
+
     public User() {}
 
     public User(String email, String username, String password, int points) {
@@ -94,6 +96,10 @@ public class User {
     public void setPoints(int points) {
         this.points = points;
     }
+
+    public void flipDarkMode(){ darkMode = !darkMode; }
+
+    public boolean isDarkMode() { return darkMode; };
 
     @Override
     public boolean equals(Object o) {

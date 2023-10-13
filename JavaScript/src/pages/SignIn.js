@@ -12,7 +12,6 @@ export default function SignInSide(props) {
   const [usernameNotFound, setUsernameNotFound] = useState(false);
   const [passwordHelperText, setPasswordHelperText] = useState("");
   const [usernameHelperText, setUsernameHelperText] = useState("");
-  // console.log(props.user, props.habits)
   const [userLoggingIn, setUserLoggingIn] = useState({
     email: "",
     username: "",
@@ -27,15 +26,16 @@ export default function SignInSide(props) {
     }).then((res) => res.json());
   }
 
-  console.log(token);
 
   const handleLogin = () => {
     fetchToken().then((response) => {
       if (response.token) {
-        console.log("response", response);
         setPasswordHelperText("");
         setUsernameHelperText("");
         props.setUser(response);
+
+        props.setDarkMode(response.darkMode === "true");
+
         navigate("/");
       } else if (response.errorMessage) {
         if (response.errorMessage === "Invalid Password") {
