@@ -10,34 +10,80 @@ import Home from "./pages/Home";
 import Layout from "./pages/Layout";
 import SignIn from "./pages/SignIn";
 import YourProgress from "./pages/YourProgress";
+import { grey } from '@mui/material/colors';
+
 
 function App() {
   const [user, setUser] = useState(localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {token: ""});
   const [habits, setHabits] = useState([]);
   const [darkMode, setDarkMode] = useState(user.darkMode? user.darkMode : false);
   
-  const handleToggleTheme = () => {
-    fetch(`http://localhost:8080/api/user/darkmode`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: user.token,
-      }
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        user.darkMode = data;
-        setDarkMode(user.darkMode);
-        localStorage.setItem("user", JSON.stringify(user));
+  const handleToggleTheme = (signout) => {
+    if(signout){
+      setDarkMode(false);
+      return;
+    }
+      fetch(`http://localhost:8080/api/user/darkmode`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: user.token,
+        }
       })
+        .then((res) => res.json())
+        .then((data) => {
+          user.darkMode = data;
+          setDarkMode(user.darkMode);
+          localStorage.setItem("user", JSON.stringify(user));
+        }) 
   };
-  const theme = createTheme({
-    palette: {
-      mode: darkMode ? "dark" : "light",
+
+  const colors = {
+    primary: {
+      main: '#4175cf',
+      light: '#4b95f1',
+      dark: '#33469c',
+      constrastText: "#fff"
     },
-  });
+    secondary: {
+      main: '#9c27b0',
+      light: "#af52bf",
+      dark: "#6d1b7b",
+      constrastText: "#fff"
+    },
+    greys: {
+      main: "#0d47a1",
+      light: "#3d6bb3",
+      dark: "#093170",
+      constrastText: "#fff"
+    }
+  }
+
+  const theme = createTheme(({
+    palette: {
+      mode: darkMode ? "dark": "light",
+      ...(!darkMode
+        ? {
+          primary: colors.primary,
+          secondary: colors.secondary,
+          text: {
+            primary: grey[900],
+            secondary: grey[800],
+          },
+        }:{
+          primary: colors.secondary,
+          secondary: colors.primary,
+          text:{
+            primary: '#fff',
+            secondary: grey[500],
+          },
+        })
+    }
+    
+  }));
 
   const fetchHabits = () => {
+    if(user.token === "") return;
     fetch("http://localhost:8080/api/habits/", {
       headers: {
         Authorization: user.token,

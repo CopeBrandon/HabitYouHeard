@@ -29,9 +29,9 @@ export default function Home({ habits, setHabits, onToggleTheme, user, setUser, 
 
   function handleSignout(){
     setUser({token: ""})
+    onToggleTheme(true);
     setHabits([])
     navigate("/auth/signin")
-    
   }
   const navigate = useNavigate();
 

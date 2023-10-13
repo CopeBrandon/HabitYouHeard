@@ -33,7 +33,7 @@ export default function SignInSide(props) {
         setPasswordHelperText("");
         setUsernameHelperText("");
         props.setUser(response);
-        
+
         props.setDarkMode(response.darkMode === "true");
 
         navigate("/");
