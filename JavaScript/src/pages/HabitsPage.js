@@ -47,7 +47,7 @@ export default function HabitsPage({ habits, setHabits, user }) {
   });
 
   const handleStopHabit = (habitId) => {
-    fetch(`http://localhost:8080/api/habit/${habitId}/stop`, {
+    fetch(`${process.env.REACT_APP_HABIT_SERVER_URL}api/habit/${habitId}/stop`, {
       method: "POST",
       headers: {
         Authorization: user.token,
@@ -61,7 +61,7 @@ export default function HabitsPage({ habits, setHabits, user }) {
   };
 
   const handleCreateHabitFetch = () => {
-    fetch("http://localhost:8080/api/habit/create", {
+    fetch(`${process.env.REACT_APP_HABIT_SERVER_URL}api/habit/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

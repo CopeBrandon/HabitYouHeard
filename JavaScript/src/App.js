@@ -12,9 +12,10 @@ import SignIn from "./pages/SignIn";
 import YourProgress from "./pages/YourProgress";
 
 function App() {
+  console.log(process.env)
+  console.log(process.env.REACT_APP_HABIT_SERVER_URL);
   const [user, setUser] = useState(localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {token: ""});
   const [habits, setHabits] = useState([]);
-
   const [darkMode, setDarkMode] = useState(false);
   const handleToggleTheme = () => {
     setDarkMode(!darkMode);
@@ -26,7 +27,7 @@ function App() {
   });
 
   const fetchHabits = () => {
-    fetch("http://localhost:8080/api/habits/", {
+    fetch(process.env.REACT_APP_HABIT_SERVER_URL + "api/habits/", {
       headers: {
         Authorization: user.token,
       },
@@ -40,7 +41,9 @@ function App() {
   };
 
   useEffect(() => {
-    fetchHabits();
+    // if(user.token){
+      fetchHabits();
+    // }
     localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 

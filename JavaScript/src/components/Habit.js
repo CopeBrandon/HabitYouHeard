@@ -26,7 +26,7 @@ function Habit({ habits, setHabits, habit, user }) {
   const id = open ? "simple-popover" : undefined;
 
   const handleAffirmHabit = (habitId, type) => {
-    fetch(`http://localhost:8080/api/habit/${habitId}/${type}`, {
+    fetch(`${process.env.REACT_APP_HABIT_SERVER_URL}api/habit/${habitId}/${type}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

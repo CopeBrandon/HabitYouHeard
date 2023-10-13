@@ -115,7 +115,7 @@ const SignUp = () => {
       password: user.password,
     };
 
-    fetch("http://localhost:8080/api/user/create", {
+    fetch(`${process.env.REACT_APP_HABIT_SERVER_URL}api/user/create`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newUser),

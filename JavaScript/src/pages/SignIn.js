@@ -12,7 +12,6 @@ export default function SignInSide(props) {
   const [usernameNotFound, setUsernameNotFound] = useState(false);
   const [passwordHelperText, setPasswordHelperText] = useState("");
   const [usernameHelperText, setUsernameHelperText] = useState("");
-  // console.log(props.user, props.habits)
   const [userLoggingIn, setUserLoggingIn] = useState({
     email: "",
     username: "",
@@ -20,19 +19,16 @@ export default function SignInSide(props) {
   });
 
   async function fetchToken() {
-    return await fetch("http://localhost:8080/api/auth/assign/token", {
+    return await fetch(process.env.REACT_APP_HABIT_SERVER_URL + "api/auth/assign/token", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userLoggingIn),
     }).then((res) => res.json());
   }
 
-  console.log(token);
-
   const handleLogin = () => {
     fetchToken().then((response) => {
       if (response.token) {
-        console.log("response", response);
         setPasswordHelperText("");
         setUsernameHelperText("");
         props.setUser(response);
