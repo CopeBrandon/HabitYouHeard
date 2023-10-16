@@ -3,12 +3,16 @@
 - Allow you to click in the calendar to change a habit meta.
 - Maybe allow you to pull up a list of habit meta?
 - Change password.
-- Styling of dark mode is rough. The baby blue color is harsh.
-- Badges page scroll off edge issue. I think it's caused by the navbar fragment.
+- Badges page scroll off edge issue. I think it's caused by the navbar fragment. | fixed for all pages but YourProgress, imgs go off center when disableEqualOverflow="true"
 - Navbar title "Hello, ..." needs some buffer.
 - Forgot password feature.
 - Finish email feature. Needs formatting, and a page or button.
 - Calendar styling. Today button is lower case??? Make it smaller on the page with some padding.
-- dark mode stored in user preferences
 - useEffect causes error when called before user is stated.
 - Clamp width of tooltip on habit description if it gets too long. Maybe force a maximum size?
+- Add page that is routed from the sign-in page that explains what this website is about.
+- MIGHT add a dark mode toggle in the sign in/ sign up page that doesn't rely on user's token to work
+- Add a sign up button
+- update taskbar to contain all buttons on all pages, except for the page it is currently on
+- responsive size for all components
+- Consider removing second password in sign up.

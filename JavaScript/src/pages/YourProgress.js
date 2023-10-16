@@ -4,6 +4,7 @@ import Taskbar from "../components/Taskbar";
 import Users from "../testData/testUsers.json";
 import Habits from "../testData/testHabits.json";
 import { Paper } from '@mui/material';
+import { Box } from '@mui/material';
 import HabitBadgeProgress from '../components/HabitBadgeProgress';
 import BackButtonBar from "../components/BackButtonBar";
 
@@ -42,12 +43,13 @@ const getStreakMessage = (streak) => {
 //TODO: remove placeholder user in taskbar.
 const YourProgress = ({habits, user, darkMode, onToggleTheme, setHabits, setUser}) => {
       return (
-      <Paper sx={{backgroundImage: `url(backgroun.png)`,
+      <Box sx={{backgroundImage: `url(backgroun.png)`,
                   backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center",
-                  minxWidth: "100vw",
-                  minHeight: "100vh"}}>
+                  minHeight:"100vh",
+                  minWidth:"100vw"
+                  }}>
         {/*<Taskbar contentType="points" name={user.username} points={user.points}></Taskbar>*/}
         <BackButtonBar 
           points={user.points}
@@ -56,7 +58,7 @@ const YourProgress = ({habits, user, darkMode, onToggleTheme, setHabits, setUser
           setUser={setUser}
           setHabits={setHabits}
           contentType="points"/>
-        <Grid container spacing={10} marginTop="70px" justifyContent="center">
+        <Grid container rowSpacing={8} columnSpacing={8} justifyContent="center" >
             {habits.map((habit) => (
                 <HabitBadgeProgress 
                   title={habit.name}
@@ -64,9 +66,10 @@ const YourProgress = ({habits, user, darkMode, onToggleTheme, setHabits, setUser
                   badgeMeta={getBadgeNameAndURL(habit.pointValue)}
                   streakLength={getStreakMessage(habit.streak)}
                   score={habit.pointValue}
+                  darkMode={darkMode}
                 />
             ))}
         </Grid>
-      </Paper>)};
+      </Box>)};
   
   export default YourProgress;

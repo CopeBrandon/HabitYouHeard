@@ -50,7 +50,7 @@ export default function Home({ habits, setHabits, onToggleTheme, user, setUser, 
 
           <Stack direction="row" spacing={2}>
             <ThemeToggle darkMode={darkMode} onToggleTheme={onToggleTheme} />
-            <LinkButton to="yourprogress">Badges</LinkButton>
+            <LinkButton to="/yourprogress">Badges</LinkButton>
             <LinkButton to="/auth/signin" onClick={() => handleSignout()}>Logout</LinkButton>
           </Stack>
         </Stack>
@@ -91,7 +91,7 @@ export default function Home({ habits, setHabits, onToggleTheme, user, setUser, 
         </Grid>
       </Grid>
 
-      <Grid container spacing={2}>
+      <Grid container spacing={2} disableEqualOverflow="true">
         {todaysHabits.map((habit) => (
           <Grid key={habit.id} xs={6} display="flex" justifyContent="center">
             <Habit

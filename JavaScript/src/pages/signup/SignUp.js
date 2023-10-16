@@ -25,7 +25,7 @@ const SignUp = () => {
     email: "",
     username: "",
     password: "",
-    password2: "",
+    verifyPassword: "",
   });
 
   function isValidEmail(email) {
@@ -62,7 +62,7 @@ const SignUp = () => {
       setPasswordHasError(true);
 
       return "Password must be less than 128 characters!";
-    } else if (user.password !== user.password2) {
+    } else if (user.password !== user.verifyPassword) {
       setPasswordHasError(true);
 
       return "Passwords are not the same";
@@ -183,12 +183,12 @@ const SignUp = () => {
           helperText={passwordHelperText}
         />
         <TextField
-          label="Password2"
+          label="Verify Password"
           variant="standard"
           type="password"
-          value={user.password2}
+          value={user.verifyPassword}
           onChange={(e) => {
-            let updatedValue = { password2: e.target.value };
+            let updatedValue = { verifyPassword: e.target.value };
             setUser((user) => ({
               ...user,
               ...updatedValue,
