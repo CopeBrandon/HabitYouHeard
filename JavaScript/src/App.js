@@ -52,9 +52,9 @@ function App() {
       constrastText: "#fff"
     },
     greys: {
-      main: "#0d47a1",
-      light: "#3d6bb3",
-      dark: "#093170",
+      main: "#34373d",
+      light: "#52555c",
+      dark: "#14171d",
       constrastText: "#fff"
     }
   }
@@ -66,6 +66,8 @@ function App() {
         ? {
           primary: colors.primary,
           secondary: colors.secondary,
+          overlay: colors.primary.dark,
+          
           text: {
             primary: grey[900],
             secondary: grey[800],
@@ -73,6 +75,11 @@ function App() {
         }:{
           primary: colors.secondary,
           secondary: colors.primary,
+          overlay: colors.secondary.main,
+          background: {
+            default: colors.greys.dark,
+            paper: colors.greys.main,
+          },
           text:{
             primary: '#fff',
             secondary: grey[500],

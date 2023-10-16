@@ -3,11 +3,18 @@ import TextField from "@mui/material/TextField";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import AuthLayout from "../components/layouts/AuthLayout";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
 
 export default function SignInSide(props) {
   const navigate = useNavigate();
   const [token, setToken] = useState("");
   const [loginClicked, setLoginClicked] = useState(false);
+
+  const [showPassword, setShowPassword] = React.useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const [usernameNotFound, setUsernameNotFound] = useState(false);
   const [passwordHelperText, setPasswordHelperText] = useState("");
@@ -75,9 +82,10 @@ export default function SignInSide(props) {
           helperText={usernameHelperText}
         />
         <TextField
+          id="password-with-visibility-icon"
           label="Password"
           variant="standard"
-          type="password"
+          type={showPassword ? "text" : "password"}
           value={userLoggingIn.password}
           onChange={(e) => {
             let updatedValue = { password: e.target.value };
@@ -86,9 +94,23 @@ export default function SignInSide(props) {
               ...updatedValue,
             }));
           }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  edge="end"
+                >{/*TODO: handleMouseDown event? no idea why i need to preventDefault for this...*/}
+                  {showPassword ? <VisibilityOff/> : <Visibility/>}
+                </IconButton>
+              </InputAdornment>
+            )
+          }}
           error={passwordHelperText === "Invalid Password!"}
           helperText={passwordHelperText}
-        />
+        >
+        </TextField>
       </Stack>
     </AuthLayout>
   );

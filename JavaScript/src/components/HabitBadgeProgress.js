@@ -3,7 +3,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { Paper, Typography, Popover,} from '@mui/material';
 import { borders, Box, sizing } from "@mui/system";
 
-const HabitBadgeProgress = ({title, description, badgeMeta, streakLength, }) => {
+const HabitBadgeProgress = ({title, description, badgeMeta, streakLength, darkMode}) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     
     const handlePopoverOpen = (event) => {
@@ -14,10 +14,12 @@ const HabitBadgeProgress = ({title, description, badgeMeta, streakLength, }) => 
     };
     const open = Boolean(anchorEl);
 
+    const componentElevation = () => !darkMode ? 5 : 2;
+
     return (
     <Grid xs={10} md={3.5}>
         <Paper 
-            elevation={"7"} 
+            elevation={componentElevation()} 
             sx={{
                 backgroundColor: "primary.main",
                 alignItems: "center",
@@ -48,7 +50,7 @@ const HabitBadgeProgress = ({title, description, badgeMeta, streakLength, }) => 
                         maxWidth: "200px",
                         margin: "auto",
                         '&:hover': {
-                            backgroundColor: 'primary.main',
+                            backgroundColor: 'overlay',
                             opacity: [0.95],
                         }    
                     }}/>

@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
 import { styled } from "@mui/system";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@mui/material";
 
 const CircleButton = styled(Button)({
   borderRadius: 100,
@@ -14,7 +14,7 @@ const CircleButton = styled(Button)({
 });
 
 const StyledDiv = styled("div")({
-  marginLeft: 32,
+  
   alignItems: "center",
   display: "flex",
   flexDirection: "column",
@@ -43,7 +43,7 @@ function AuthLayout(props) {
               <ArrowForwardIcon fontSize="large" sx={{ fontSize: 48 }} />
             </CircleButton>
           </Grid>
-          <Link sx={{ margin: "auto" }} to={props.linkPath}>
+          <Link sx={{ marginTop:"5px"}} href={props.linkPath}>
             {props.linkTitle}
           </Link>
         </Grid>

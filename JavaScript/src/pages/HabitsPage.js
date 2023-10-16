@@ -153,7 +153,7 @@ export default function HabitsPage({ habits, setHabits, user }) {
         </Grid>
       </Grid>
 
-      <Grid container spacing={2} marginTop="20px">
+      <Grid container spacing={2} marginTop="20px" disableEqualOverflow="true">
         {habits.map((habit) => (
           <Grid key={habit.id} xs={6} display="flex" justifyContent="center">
             <AddHabit
