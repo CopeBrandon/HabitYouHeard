@@ -66,7 +66,7 @@ export default function SignInSide(props) {
       linkPath="/auth/signup"
       linkTitle="Sign Up"
     >
-      <Stack spacing={4} maxWidth={800}>
+      <Stack spacing={3} maxWidth={800}>
         <TextField
           label="Username"
           variant="standard"

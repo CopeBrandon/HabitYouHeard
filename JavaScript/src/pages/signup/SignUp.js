@@ -138,7 +138,7 @@ const SignUp = () => {
       linkPath="/auth/signin"
       linkTitle="Already have an account? Sign In"
     >
-      <Stack spacing={4} maxWidth={800}>
+      <Stack spacing={3} maxWidth={800}>
         <TextField
           label="Email"
           variant="standard"

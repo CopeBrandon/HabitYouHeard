@@ -39,13 +39,13 @@ function App() {
   };
 
   const colors = {
-    primary: {
+    blues: {
       main: '#4175cf',
       light: '#4b95f1',
       dark: '#33469c',
       constrastText: "#fff"
     },
-    secondary: {
+    purples: {
       main: '#9c27b0',
       light: "#af52bf",
       dark: "#6d1b7b",
@@ -64,18 +64,18 @@ function App() {
       mode: darkMode ? "dark": "light",
       ...(!darkMode
         ? {
-          primary: colors.primary,
-          secondary: colors.secondary,
-          overlay: colors.primary.dark,
+          primary: colors.blues,
+          secondary: colors.purples,
+          overlay: colors.blues.dark,
           
           text: {
             primary: grey[900],
             secondary: grey[800],
           },
         }:{
-          primary: colors.secondary,
-          secondary: colors.primary,
-          overlay: colors.secondary.main,
+          primary: colors.purples,
+          secondary: colors.blues,
+          overlay: colors.purples.main,
           background: {
             default: colors.greys.dark,
             paper: colors.greys.main,
