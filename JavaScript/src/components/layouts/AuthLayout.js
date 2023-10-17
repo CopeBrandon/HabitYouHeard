@@ -43,9 +43,12 @@ function AuthLayout(props) {
               <ArrowForwardIcon fontSize="large" sx={{ fontSize: 48 }} />
             </CircleButton>
           </Grid>
-          <Link sx={{ marginTop:"5px"}} href={props.linkPath}>
+          <Button variant="text" href={props.linkPath} sx={{
+            marginTop:"5px",
+            marginLeft: "-8px"
+          }}>
             {props.linkTitle}
-          </Link>
+          </Button>
         </Grid>
       </Paper>
     </StyledDiv>

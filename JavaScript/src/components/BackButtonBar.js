@@ -17,6 +17,7 @@ const StyledDiv = styled("div")(() => ({
 export default function BackButtonBar({points, darkMode, onToggleTheme, setUser, setHabits, contentType}){
     function handleSignout(){
         setUser({token: ""})
+        onToggleTheme(true);
         setHabits([])
         Navigate("/auth/signin")
     }
