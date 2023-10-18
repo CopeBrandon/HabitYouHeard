@@ -12,12 +12,14 @@
 - Clamp width of tooltip on habit description if it gets too long. Maybe force a maximum size?
 - Add page that is routed from the sign-in page that explains what this website is about.
 - MIGHT add a dark mode toggle in the sign in/ sign up page that doesn't rely on user's token to work
-- Add a sign up button
 - Update taskbar to contain all buttons on all pages, except for the page it is currently on.
 - Responsive size for all components:
     - Size of description box minimum size?
     - Home and Habits page "habit" buttons
     - Appbar gets taller as aspect ratio decreases, might require javascript to calculate whenever viewport changes?
+    - Possibly add a dropdown if aspect ratio decreases instead of the above.
 - Consider removing second password in sign up.
 - Rework getBadgeNameAndURL function to call an instance of an object that contains all data instead of using a series of arrays.
     - Basically, have a "Badge class" that contains the division, its colors, number, ranking in the division, and imgurl
+- If previous habit-meta has no data and is from a past date, should be red.
+- Display inactive habits with a toggle, and allow the user to reactivate or permanently disable them.

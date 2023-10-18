@@ -17,7 +17,7 @@ const HabitBadgeProgress = ({title, description, badgeMeta, streakLength, darkMo
     const componentElevation = () => !darkMode ? 5 : 2;
 
     return (
-    <Grid xs={10} md={3.5}>
+    <Grid xs={10} md={10} lg={3.5}>
         <Paper 
             elevation={componentElevation()} 
             sx={{
@@ -77,29 +77,26 @@ const HabitBadgeProgress = ({title, description, badgeMeta, streakLength, darkMo
                 border:"1px solid",
                 borderColor:"#fafafa",
                 width: "200px",
-                backgroundColor: "primary.main"
-            }}}>   
-                <Typography sx={{
-                    color: "#fafafa",
-                    textAlign: "center", 
-                }}>
-                        <Box>
-                            <Paper elevation="6" sx={{
-                                backgroundColor: badgeMeta.color,
-                                color: badgeMeta.offColor,
-                                width: "95%",
-                                height: "95%",
-                                margin: "auto",
-                                marginTop: "5px",
-                                fontSize: "1.2rem"
-                            }}>{badgeMeta.rank}</Paper>
-                        </Box> 
-                        <Box borderBottom="1px solid" borderColor="#fafafa" padding="10px" color="primary.contrastText" >{description}</Box>
-                        <Box                                padding="10px" color="primary.contrastText">{streakLength}</Box>
-                </Typography>
+                backgroundColor: "primary.main",
+                color:"#fafafa",
+                textAlign:"center"
+            }}}
+        >   
+            <Box>
+                <Paper elevation={6} sx={{
+                    backgroundColor: badgeMeta.color,
+                    color: badgeMeta.offColor,
+                    width: "95%",
+                    height: "95%",
+                    margin: "auto",
+                    marginTop: "5px",
+                    fontSize: "1.2rem"
+                }}>{badgeMeta.rank}</Paper>
+            </Box> 
+            <Box borderBottom="1px solid" borderColor="#fafafa" padding="10px" color="primary.contrastText" >{description}</Box>
+            <Box padding="10px" color="primary.contrastText">{streakLength}</Box>
         </Popover>
-    </Grid>
-    );
+    </Grid>);
 };
 
 export default HabitBadgeProgress;

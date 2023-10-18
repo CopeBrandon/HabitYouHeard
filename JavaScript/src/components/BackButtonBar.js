@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack"
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate , useLocation } from "react-router-dom";
 import { ArrowBack } from "@mui/icons-material";
 import LinkButton from "./LinkButton";
 import { Grid, AppBar, Paper } from "@mui/material";
@@ -14,64 +14,70 @@ const StyledDiv = styled("div")(() => ({
     justifyContent: "center",
 }));
 
-export default function BackButtonBar({points, darkMode, onToggleTheme, setUser, setHabits, contentType}){
+export default function BackButtonBar({points, darkMode, onToggleTheme, user, setUser, setHabits, contentType, bubbleLink, endButtons}){
     function handleSignout(){
         setUser({token: ""})
         onToggleTheme(true);
         setHabits([])
         Navigate("/auth/signin")
     }
-
     let bubbleContent;
-    let bubbleLink;
-    if(contentType === "date"){
-        const current = new Date();
-        bubbleContent = () => `${current.getMonth() + 1}/${current.getDate()}/${current.getFullYear()}`;
-        bubbleLink = "/calendar";
-    } else if (contentType === "points"){
-        bubbleContent = () => {return (<><u>Points</u><br/>{points}</>);}
-        bubbleLink = "/habitsPage";
+    if(contentType ==="date"){
+        const date = new Date();
+        bubbleContent = () => `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
+    } else if(contentType === "points"){
+        bubbleContent = () => {return (<><u>Points</u><br/>{points}</>)}
     }
-
     const componentElevation = () => !darkMode ? 5 : 0;
 
     return (
-    <AppBar sx={{marginBottom: "120px"}} position="static">
-        <Grid container alignItems="flex-start">
-            <Grid xs={4}>
-                <Paper
-                    elevation={componentElevation()}
-                    sx={{
-                    backgroundColor: "primary.main",
-                    display: "flex",
-                    width: 130,
-                    height: 130,
-                    borderEndEndRadius: 130,
-                    position: "relative",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    marginBottom: "-60px"
-                    }}
-                >
-                    <Link to="/" sx={{ textDecoration: "none" }}>
-                    <Box
+    <AppBar sx={{marginBottom: "120px"}} position="static" elevation={0}>
+        <Grid container>
+            <Grid xs={4} sx={{
+                height:70,
+            }}  display="flex"
+            >
+                {useLocation().pathname === "/" ?
+                    <Typography
+                        variant="h4"
+                        noWrap
+                        sx={{ flexGrow: 1, alignSelf: "center"}}
+                    >
+                        Hello, {user.username}
+                    </Typography>
+                    :
+                    <Paper
+                        elevation={0}
                         sx={{
-                        backgroundColor: "#fafafa",
-                        display: "flex",
-                        width: 60,
-                        height: 60,
-                        borderRadius: 100,
-                        justifyContent: "center",
-                        alignItems: "center",
+                            backgroundColor: "primary.main",
+                            display: "flex",
+                            width: 130,
+                            height: 130,
+                            borderEndEndRadius: 130,
+                            justifyContent: "center",
+                            alignItems: "center",
                         }}
                     >
-                        <ArrowBack />
-                    </Box>
-                    </Link>
-                </Paper>
+                        <Link to="/" sx={{ textDecoration: "none" }}>
+                        <Box
+                            sx={{
+                                backgroundColor: "#fafafa",
+                                display: "flex",
+                                width: 60,
+                                height: 60,
+                                borderRadius: 100,
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}
+                        >
+                            <ArrowBack />
+                        </Box>
+                        </Link>
+                    </Paper>
+                }
             </Grid>
             <Grid xs={4}>
-                <Link to="/" textDecoration="none"> {/*to={bubbleLink*/}
+                <Link to={bubbleLink} textDecoration="none"> {/*to={bubbleLink*/}
                     <StyledDiv>
                         <Paper
                         elevation={componentElevation()}
@@ -103,6 +109,9 @@ export default function BackButtonBar({points, darkMode, onToggleTheme, setUser,
             <Grid xs={4}>
                 <Stack direction="row" spacing={2} justifyContent="flex-end">
                     <ThemeToggle darkMode={darkMode} onToggleTheme={onToggleTheme} />
+                    {endButtons ? endButtons.map((button) => (
+                        <LinkButton to={button.link} key={button.id}>{button.content} </LinkButton>
+                    )) : ""}
                     <LinkButton to="/auth/signin" onClick={()=>{handleSignout()}}>Logout</LinkButton>
                 </Stack>
             </Grid>
