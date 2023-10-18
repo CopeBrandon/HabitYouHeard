@@ -51,10 +51,10 @@ export default function Home({ habits, setHabits, onToggleTheme, user, setUser, 
           {link:"/yourprogress", content:"Badges", id:1}
         ]}
       />
-      <Grid container sx={{ marginBottom: "50px" }}>
+      <Grid container sx={{ marginTop:"-70px", marginBottom: "50px" }}>
         <Grid xs={6} display="flex" justifyContent="center">
           <LinkButton to="habitsPage" sx={{ width: 155, height: 45 }}>
-            Daily Habits
+            Manage Habits
           </LinkButton>
         </Grid>
       </Grid>

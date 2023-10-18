@@ -1,25 +1,28 @@
 # Things I'd Change
-- The styling of the front page seems barren without many habits.
-- Allow you to click in the calendar to change a habit meta.
 - Maybe allow you to pull up a list of habit meta?
-- Change password.
-- Badges page scroll off edge issue. I think it's caused by the navbar fragment. | fixed for all pages but YourProgress, imgs go off center when disableEqualOverflow="true"
-- Navbar title "Hello, ..." needs some buffer.
-- Forgot password feature.
 - Finish email feature. Needs formatting, and a page or button.
-- Calendar styling. Today button is lower case??? Make it smaller on the page with some padding.
-- useEffect causes error when called before user is stated.
-- Clamp width of tooltip on habit description if it gets too long. Maybe force a maximum size?
-- Add page that is routed from the sign-in page that explains what this website is about.
-- MIGHT add a dark mode toggle in the sign in/ sign up page that doesn't rely on user's token to work
 - Update taskbar to contain all buttons on all pages, except for the page it is currently on.
 - Responsive size for all components:
+    - Clamp width of tooltip on habit description if it gets too long. Maybe force a maximum size?
     - Size of description box minimum size?
     - Home and Habits page "habit" buttons
     - Appbar gets taller as aspect ratio decreases, might require javascript to calculate whenever viewport changes?
     - Possibly add a dropdown if aspect ratio decreases instead of the above.
-- Consider removing second password in sign up.
 - Rework getBadgeNameAndURL function to call an instance of an object that contains all data instead of using a series of arrays.
     - Basically, have a "Badge class" that contains the division, its colors, number, ranking in the division, and imgurl
-- If previous habit-meta has no data and is from a past date, should be red.
-- Display inactive habits with a toggle, and allow the user to reactivate or permanently disable them.
+- Calendar related stuff:
+    - If previous habit-meta has no data and is from a past date, should be red.
+    - Allow you to click in the calendar to change a habit meta.
+    - Calendar styling. Today button is lower case??? Make it smaller on the page with some padding.
+    - Display inactive habits with a toggle, and allow the user to reactivate or permanently disable them.
+    - Possibly allow users to see inactive habitmeta in the calendar.
+    - Method to build calendar is slow, might be intrinsic to full calendar, though.(look into only building the calendar once on navigation)
+- Home page related stuff:
+    - Display home page message if user has no habits.
+    - Page looks sparse when few habits.
+- Sign in related stuff:
+    - Change password.
+    - Forgot password feature.
+    - Consider removing second password in sign up.
+    - Add page that is routed from the sign-in page that explains what this website is about.
+    - MIGHT add a dark mode toggle in the sign in/ sign up page that doesn't rely on user's token to work

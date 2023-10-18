@@ -3,10 +3,10 @@ import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack"
-import { Link, Navigate , useLocation } from "react-router-dom";
+import { Link, Navigate, useNavigate, useLocation } from "react-router-dom";
 import { ArrowBack } from "@mui/icons-material";
 import LinkButton from "./LinkButton";
-import { Grid, AppBar, Paper } from "@mui/material";
+import { Grid, AppBar, Paper , Button } from "@mui/material";
 import ThemeToggle from "../components/ThemeToggle";
 
 const StyledDiv = styled("div")(() => ({
@@ -15,11 +15,12 @@ const StyledDiv = styled("div")(() => ({
 }));
 
 export default function BackButtonBar({points, darkMode, onToggleTheme, user, setUser, setHabits, contentType, bubbleLink, endButtons}){
-    function handleSignout(){
+    const navigate = useNavigate();
+    const handleSignout = () => {
         setUser({token: ""})
         onToggleTheme(true);
         setHabits([])
-        Navigate("/auth/signin")
+        navigate("/auth/signin")
     }
     let bubbleContent;
     if(contentType ==="date"){
@@ -33,7 +34,7 @@ export default function BackButtonBar({points, darkMode, onToggleTheme, user, se
     return (
     <AppBar sx={{marginBottom: "120px"}} position="static" elevation={0}>
         <Grid container>
-            <Grid xs={4} sx={{
+            <Grid item xs={4} sx={{
                 height:70,
             }}  display="flex"
             >
@@ -41,7 +42,7 @@ export default function BackButtonBar({points, darkMode, onToggleTheme, user, se
                     <Typography
                         variant="h4"
                         noWrap
-                        sx={{ flexGrow: 1, alignSelf: "center"}}
+                        sx={{ marginLeft: "14px", flexGrow: 1, alignSelf: "center"}}
                     >
                         Hello, {user.username}
                     </Typography>
@@ -58,25 +59,25 @@ export default function BackButtonBar({points, darkMode, onToggleTheme, user, se
                             alignItems: "center",
                         }}
                     >
-                        <Link to="/" sx={{ textDecoration: "none" }}>
-                        <Box
-                            sx={{
-                                backgroundColor: "#fafafa",
-                                display: "flex",
-                                width: 60,
-                                height: 60,
-                                borderRadius: 100,
-                                justifyContent: "center",
-                                alignItems: "center",
-                            }}
-                        >
-                            <ArrowBack />
-                        </Box>
-                        </Link>
+                        <Button onClick={()=>navigate(-1)}>
+                            <Box
+                                sx={{
+                                    backgroundColor: "#fafafa",
+                                    display: "flex",
+                                    width: 60,
+                                    height: 60,
+                                    borderRadius: 100,
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                }}
+                            >
+                                <ArrowBack />
+                            </Box>
+                        </Button>
                     </Paper>
                 }
             </Grid>
-            <Grid xs={4}>
+            <Grid item xs={4}>
                 <Link to={bubbleLink} textDecoration="none"> {/*to={bubbleLink*/}
                     <StyledDiv>
                         <Paper
@@ -106,13 +107,13 @@ export default function BackButtonBar({points, darkMode, onToggleTheme, user, se
                     </StyledDiv>
                 </Link>
             </Grid>
-            <Grid xs={4}>
-                <Stack direction="row" spacing={2} justifyContent="flex-end">
+            <Grid item xs={4} display="flex" justifyContent="flex-end" alignItems="center">
+                <Stack direction="row" spacing={2} justifyContent="flex-end" marginRight="16px">
                     <ThemeToggle darkMode={darkMode} onToggleTheme={onToggleTheme} />
                     {endButtons ? endButtons.map((button) => (
                         <LinkButton to={button.link} key={button.id}>{button.content} </LinkButton>
                     )) : ""}
-                    <LinkButton to="/auth/signin" onClick={()=>{handleSignout()}}>Logout</LinkButton>
+                    <LinkButton to="/auth/signin" onClick={handleSignout}>Logout</LinkButton>
                 </Stack>
             </Grid>
         </Grid>
