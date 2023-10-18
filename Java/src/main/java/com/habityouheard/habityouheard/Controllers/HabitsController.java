@@ -90,7 +90,7 @@ public class HabitsController {
 
     }
 
-    @Scheduled(cron = "0 01 00 * * * ")
+    //@Scheduled(cron = "0 01 00 * * * ")
     @Transactional
     public void defirmRemainingHabitsForYesterday() {
         List<Habit> allHabits = habitRepository.findAllScheduledHabitsForYesterday();

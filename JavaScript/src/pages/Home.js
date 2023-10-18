@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import Habit from "../components/Habit";
 import LinkButton from "../components/LinkButton";
 import ThemeToggle from "../components/ThemeToggle";
+import BackButtonBar from "../components/BackButtonBar";
 
 const StyledDiv = styled("div")(() => ({
   display: "flex",
@@ -37,56 +38,23 @@ export default function Home({ habits, setHabits, onToggleTheme, user, setUser, 
 
   return (
     <>
-      <AppBar sx={{ marginBottom: "15px" }} position="static">
-        <Stack direction="row" paddingBottom={4} minHeight="43px">
-          <Typography
-            variant="h4"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, alignSelf: "flex-start" }}
-          >
-            Hello, {user.username}
-          </Typography>
-
-          <Stack direction="row" spacing={2}>
-            <ThemeToggle darkMode={darkMode} onToggleTheme={onToggleTheme} />
-            <LinkButton to="/yourprogress">Badges</LinkButton>
-            <LinkButton to="/auth/signin" onClick={() => handleSignout()}>Logout</LinkButton>
-          </Stack>
-        </Stack>
-
-        <Link to="calendar" textDecoration="none">
-          <StyledDiv>
-            <Box
-              sx={{
-                width: 150,
-                height: 150,
-                borderRadius: 100,
-                backgroundColor: "secondary.dark",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                position: "absolute",
-                top: 0,
-              }}
-            >
-              <Typography
-                sx={{
-                  color: "#fafafa",
-                  fontSize: 25,
-                }}
-              >
-                {date}
-              </Typography>
-            </Box>
-          </StyledDiv>
-        </Link>
-      </AppBar>
-
-      <Grid container sx={{ marginBottom: "50px" }}>
+      <BackButtonBar
+        darkMode={darkMode}
+        onToggleTheme={onToggleTheme}
+        user={user}
+        setUser={setUser}
+        setHabits={setHabits}
+        contentType="date"
+        bubbleLink="/calendar"
+        endButtons={[
+          {link:"/calendar", content:"Calendar", id:0},
+          {link:"/yourprogress", content:"Badges", id:1}
+        ]}
+      />
+      <Grid container sx={{ marginTop:"-70px", marginBottom: "50px" }}>
         <Grid xs={6} display="flex" justifyContent="center">
           <LinkButton to="habitsPage" sx={{ width: 155, height: 45 }}>
-            Daily Habits
+            Manage Habits
           </LinkButton>
         </Grid>
       </Grid>

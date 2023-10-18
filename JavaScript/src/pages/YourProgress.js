@@ -42,34 +42,41 @@ const getStreakMessage = (streak) => {
 
 //TODO: remove placeholder user in taskbar.
 const YourProgress = ({habits, user, darkMode, onToggleTheme, setHabits, setUser}) => {
-      return (
-      <Box sx={{backgroundImage: `url(backgroun.png)`,
-                  backgroundSize: "cover",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "center",
-                  minHeight:"100vh",
-                  minWidth:"100vw"
-                  }}>
-        {/*<Taskbar contentType="points" name={user.username} points={user.points}></Taskbar>*/}
-        <BackButtonBar 
-          points={user.points}
-          darkMode={darkMode} 
-          onToggleTheme={onToggleTheme}
-          setUser={setUser}
-          setHabits={setHabits}
-          contentType="points"/>
-        <Grid container rowSpacing={8} columnSpacing={8} justifyContent="center" >
-            {habits.map((habit) => (
-                <HabitBadgeProgress 
-                  title={habit.name}
-                  description={habit.description}
-                  badgeMeta={getBadgeNameAndURL(habit.pointValue)}
-                  streakLength={getStreakMessage(habit.streak)}
-                  score={habit.pointValue}
-                  darkMode={darkMode}
-                />
-            ))}
-        </Grid>
-      </Box>)};
+  return (
+  <Box sx={{
+    backgroundImage: `url(backgroun.png)`,
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+  }}>
+    <BackButtonBar 
+      points={user.points}
+      darkMode={darkMode} 
+      onToggleTheme={onToggleTheme}
+      setUser={setUser}
+      setHabits={setHabits}
+      contentType="points"
+      bubbleLink="/"
+      endButtons={[
+        {link:"/calendar", content:"Calendar", id: 0}
+      ]}
+    />
+    <Grid container justifyContent="center" alignItems="center" margin="0px" 
+          rowSpacing={4}
+          columnSpacing={8}
+    >
+      {habits.map((habit) => (
+          <HabitBadgeProgress 
+            title={habit.name}
+            description={habit.description}
+            badgeMeta={getBadgeNameAndURL(habit.pointValue)}
+            streakLength={getStreakMessage(habit.streak)}
+            score={habit.pointValue}
+            darkMode={darkMode}
+            key={habit.id}
+          />
+        ))}
+    </Grid>
+  </Box>)};
   
   export default YourProgress;

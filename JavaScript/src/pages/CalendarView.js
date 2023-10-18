@@ -14,6 +14,10 @@ const CalendarView = ({user, habits, darkMode, onToggleTheme, setUser, setHabits
           setUser={setUser}
           setHabits={setHabits}
           contentType="date"
+          bubbleLink="/"
+          endButtons={[
+            {link:"/yourprogress", content:"Badges", id:0}
+          ]}
           />   
         <HabitCalendar habits={habits}/>
       </>
