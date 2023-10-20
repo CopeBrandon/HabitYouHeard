@@ -9,7 +9,7 @@ import HabitsPage from "./pages/HabitsPage";
 import Home from "./pages/Home";
 import Layout from "./pages/Layout";
 import SignIn from "./pages/SignIn";
-import YourProgress from "./pages/YourProgress";
+import Badges from "./pages/Badges";
 import { grey } from '@mui/material/colors';
 
 
@@ -134,7 +134,7 @@ function App() {
               
             />
 
-            <Route path="yourprogress" element={<YourProgress 
+            <Route path="badges" element={<Badges 
               user={user} 
               habits={habits} 
               darkMode={darkMode} 

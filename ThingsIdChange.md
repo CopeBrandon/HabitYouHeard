@@ -1,7 +1,6 @@
 # Things I'd Change
 - Maybe allow you to pull up a list of habit meta?
 - Finish email feature. Needs formatting, and a page or button.
-- Update taskbar to contain all buttons on all pages, except for the page it is currently on.
 - Responsive size for all components:
     - Clamp width of tooltip on habit description if it gets too long. Maybe force a maximum size?
     - Size of description box minimum size?
@@ -17,10 +16,12 @@
     - Display inactive habits with a toggle, and allow the user to reactivate or permanently disable them.
     - Possibly allow users to see inactive habitmeta in the calendar.
     - Method to build calendar is slow, might be intrinsic to full calendar, though.(look into only building the calendar once on navigation)
+    - Consider how to add a weekly calendar.
 - Home page related stuff:
     - Display home page message if user has no habits.
     - Page looks sparse when few habits.
 - Sign in related stuff:
+    - Color styling to make it stand out more.
     - Change password.
     - Forgot password feature.
     - Consider removing second password in sign up.

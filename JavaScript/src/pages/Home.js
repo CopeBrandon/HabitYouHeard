@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import Habit from "../components/Habit";
 import LinkButton from "../components/LinkButton";
 import ThemeToggle from "../components/ThemeToggle";
-import BackButtonBar from "../components/BackButtonBar";
+import Taskbar from "../components/Taskbar";
 
 const StyledDiv = styled("div")(() => ({
   display: "flex",
@@ -38,7 +38,7 @@ export default function Home({ habits, setHabits, onToggleTheme, user, setUser, 
 
   return (
     <>
-      <BackButtonBar
+      <Taskbar
         darkMode={darkMode}
         onToggleTheme={onToggleTheme}
         user={user}
@@ -48,7 +48,7 @@ export default function Home({ habits, setHabits, onToggleTheme, user, setUser, 
         bubbleLink="/calendar"
         endButtons={[
           {link:"/calendar", content:"Calendar", id:0},
-          {link:"/yourprogress", content:"Badges", id:1}
+          {link:"/badges", content:"Badges", id:1}
         ]}
       />
       <Grid container sx={{ marginTop:"-70px", marginBottom: "50px" }}>
