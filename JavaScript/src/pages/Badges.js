@@ -1,10 +1,7 @@
 import React from 'react';
+import { Box } from '@mui/material';
 import Grid from "@mui/material/Unstable_Grid2";
 import Taskbar from "../components/Taskbar";
-import Users from "../testData/testUsers.json";
-import Habits from "../testData/testHabits.json";
-import { Paper } from '@mui/material';
-import { Box } from '@mui/material';
 import HabitBadgeProgress from '../components/HabitBadgeProgress';
 
 const divisions = [
@@ -43,7 +40,6 @@ const getStreakMessage = (streak) => {
   return streak > 0 ? `${streak} day streak!`: "No streak yet."
 }
 
-//TODO: remove placeholder user in taskbar.
 const Badges = ({habits, user, darkMode, onToggleTheme, setHabits, setUser}) => {
   return (
   <Box sx={{
