@@ -1,15 +1,9 @@
 import React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import { styled } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Unstable_Grid2";
 import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
+import { styled } from "@mui/material/styles";
+import Grid from "@mui/material/Unstable_Grid2";
 import Habit from "../components/Habit";
 import LinkButton from "../components/LinkButton";
-import ThemeToggle from "../components/ThemeToggle";
 import Taskbar from "../components/Taskbar";
 
 const StyledDiv = styled("div")(() => ({
@@ -20,21 +14,8 @@ const StyledDiv = styled("div")(() => ({
 
 export default function Home({ habits, setHabits, onToggleTheme, user, setUser, darkMode}) {
   const current = new Date();
-  const date = `${
-    current.getMonth() + 1
-  }/${current.getDate()}/${current.getFullYear()}`;
-
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
   const todaysHabits = habits.filter((habit) => habit.selectedDays.includes(days[current.getDay()]));
-
-  function handleSignout(){
-    setUser({token: ""})
-    onToggleTheme(true);
-    setHabits([])
-    navigate("/auth/signin")
-  }
-  const navigate = useNavigate();
 
   return (
     <>

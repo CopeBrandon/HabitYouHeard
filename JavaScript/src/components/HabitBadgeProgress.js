@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Paper, Typography, Popover,} from '@mui/material';
-import { borders, Box, sizing } from "@mui/system";
+import { Box } from "@mui/system";
 
 const HabitBadgeProgress = ({title, description, badgeMeta, streakLength, darkMode}) => {
     const [anchorEl, setAnchorEl] = React.useState(null);

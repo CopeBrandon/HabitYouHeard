@@ -1,7 +1,6 @@
 import React from 'react';
 import HabitCalendar from '../components/HabitCalendar.js'
 import Taskbar from '../components/Taskbar.js';
-import { Stack } from '@mui/material';
 
 const CalendarView = ({user, habits, darkMode, onToggleTheme, setUser, setHabits}) => {
     return (

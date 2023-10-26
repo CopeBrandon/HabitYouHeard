@@ -10,8 +10,6 @@ import Home from "./pages/Home";
 import Layout from "./pages/Layout";
 import SignIn from "./pages/SignIn";
 import Badges from "./pages/Badges";
-import { grey } from '@mui/material/colors';
-
 
 function App() {
   const [user, setUser] = useState(localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {token: ""});
@@ -42,20 +40,17 @@ function App() {
     blues: {
       main: '#4175cf',
       light: '#4b95f1',
-      dark: '#33469c',
-      constrastText: "#fff"
+      dark: '#33469c'
     },
     purples: {
       main: '#9c27b0',
       light: "#af52bf",
-      dark: "#6d1b7b",
-      constrastText: "#fff"
+      dark: "#6d1b7b"
     },
     greys: {
       main: "#34373d",
       light: "#52555c",
-      dark: "#14171d",
-      constrastText: "#fff"
+      dark: "#14171d"
     }
   }
 
@@ -67,11 +62,6 @@ function App() {
           primary: colors.blues,
           secondary: colors.purples,
           overlay: colors.blues.dark,
-          
-          text: {
-            primary: grey[900],
-            secondary: grey[800],
-          },
         }:{
           primary: colors.purples,
           secondary: colors.blues,
@@ -79,11 +69,7 @@ function App() {
           background: {
             default: colors.greys.dark,
             paper: colors.greys.main,
-          },
-          text:{
-            primary: '#fff',
-            secondary: grey[500],
-          },
+          }
         })
     }
     

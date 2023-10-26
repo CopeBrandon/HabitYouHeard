@@ -1,20 +1,11 @@
-import { ArrowBack } from "@mui/icons-material";
-import AddIcon from "@mui/icons-material/Add";
-import { TextField, Typography } from "@mui/material";
-import Box from "@mui/material/Box";
-import Checkbox from "@mui/material/Checkbox";
-import Fab from "@mui/material/Fab";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import ListItemText from "@mui/material/ListItemText";
-import MenuItem from "@mui/material/MenuItem";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import Select from "@mui/material/Select";
-import Stack from "@mui/material/Stack";
-import Grid from "@mui/material/Unstable_Grid2";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { ArrowBack, Add } from "@mui/icons-material";
+import { TextField, Typography, Box, Checkbox, Fab, FormControl, InputLabel, ListItemText, MenuItem, 
+  OutlinedInput, Select, Stack} from '@mui/material';
+import Grid from "@mui/material/Unstable_Grid2";
 import AddHabit from "../components/AddHabit";
+
 
 const days = [
   "Sunday",
@@ -228,7 +219,7 @@ export default function HabitsPage({ habits, setHabits, user }) {
           </div>
 
           <Fab type="submit" color="primary" onClick={handleCreateHabitFetch}>
-            <AddIcon />
+            <Add/>
           </Fab>
         </Stack>
       </form>

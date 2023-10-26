@@ -10,13 +10,10 @@ import InputAdornment from '@mui/material/InputAdornment';
 
 export default function SignInSide(props) {
   const navigate = useNavigate();
-  const [token, setToken] = useState("");
-  const [loginClicked, setLoginClicked] = useState(false);
 
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const [usernameNotFound, setUsernameNotFound] = useState(false);
   const [passwordHelperText, setPasswordHelperText] = useState("");
   const [usernameHelperText, setUsernameHelperText] = useState("");
   const [userLoggingIn, setUserLoggingIn] = useState({
@@ -45,16 +42,8 @@ export default function SignInSide(props) {
 
         navigate("/");
       } else if (response.errorMessage) {
-        if (response.errorMessage === "Invalid Password") {
-          setPasswordHelperText("Invalid Password!");
-        } else {
-          setPasswordHelperText("");
-        }
-        if (response.errorMessage === "User Not Found") {
-          setUsernameHelperText("User Not Found");
-        } else {
-          setUsernameHelperText("");
-        }
+        setUsernameHelperText(response.errorMessage === "User Not Found" ? "User Not Found" : "");
+        setPasswordHelperText(response.errorMessage === "Invalid Password" ? "Invalid Password!" : "");
       }
     });
   };

@@ -1,4 +1,6 @@
 # Things I'd Change
+- Top priority: Fix useEffect running "fetchHabits" every time page resets, massive reason for any loss in performance... I think.
+    - If fetchHabits is needed, then consider using [this](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect)
 - Maybe allow you to pull up a list of habit meta?
 - Finish email feature. Needs formatting, and a page or button.
 - Responsive size for all components:
@@ -6,6 +8,7 @@
     - Size of description box minimum size?
     - Home and Habits page "habit" buttons
     - Appbar gets taller as aspect ratio decreases, might require javascript to calculate whenever viewport changes?
+    - Appbar back button needs to be centered better.
     - Possibly add a dropdown if aspect ratio decreases instead of the above.
 - Rework getBadgeNameAndURL function to call an instance of an object that contains all data instead of using a series of arrays.
     - Basically, have a "Badge class" that contains the division, its colors, number, ranking in the division, and imgurl
@@ -27,3 +30,4 @@
     - Consider removing second password in sign up.
     - Add page that is routed from the sign-in page that explains what this website is about.
     - MIGHT add a dark mode toggle in the sign in/ sign up page that doesn't rely on user's token to work
+    - Remove user not found and invalid password message, replace with generic so that it can't be brute forced as easily.
