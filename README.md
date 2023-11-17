@@ -75,6 +75,8 @@ Before bootRun, add the previously mentioned login name and password from your A
 ``` 
 DB_LOGIN=username;DB_PASSWORD=password;
 ```
+>If you aren't using IntelliJ, you could add a gradle.properties file within the root folder of the Java section of the project. I laid out an example file that allows you to see how to structure it. You can place your DB_LOGIN and DB_PASSWORD inside of the gradle.properties file you would make-- not the gradle.properties.example file.
+
 <table><tr>
   <td>
     <p>Since IntelliJ uses the Gradle wrapper, the easiest way to run the program is:</p>
@@ -84,6 +86,8 @@ DB_LOGIN=username;DB_PASSWORD=password;
     4. Run the bootrun configuration.<!--Since IntelliJ uses the Gradle Wrapper, the easiest way to run the program is opening the Gradle tab, navigate to habityouheard -> Tasks -> application -> bootrun.--></td>
   <td> _____________________________________________________________________<img src="readmefiles/bootrun.png" alt="Image displaying bootrun instructions" width="100%"/>
 </td></tr></table>
+
+>If you are not using IntelliJ, you can use the bootRun task by typing in the following terminal command while inside of the root folder of the Java section: `./gradlew bootRun`
 
 The API can then be accessed at [http://localhost:8080](http://localhost:8080) via Postman or another tool to access endpoints. Specific endpoint routes can be found by inspecting the Controllers. 
 

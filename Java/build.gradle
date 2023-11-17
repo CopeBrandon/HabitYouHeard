@@ -30,3 +30,24 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+tasks.register("jarRun"){
+	def login = project.findProperty("DB_LOGIN")
+	def pass = project.findProperty("DB_PASSWORD")
+	javaexec{
+		main="-jar"
+		args = [
+				'build/libs/' + project.group.substring(4) + "-" + project.version + ".jar",
+				'--DB_LOGIN='+login,
+				'--DB_PASSWORD='+pass
+		]
+	}
+}
+
+bootRun{
+	def login = project.findProperty("DB_LOGIN")
+	def pass = project.findProperty("DB_PASSWORD")
+	if(login && pass){
+		jvmArgs = ["-DDB_LOGIN="+login, "-DDB_PASSWORD="+pass]
+	}
+}
