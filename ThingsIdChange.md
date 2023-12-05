@@ -1,6 +1,7 @@
 # Things I'd Change
 - Top priority: Fix useEffect running "fetchHabits" every time page resets, massive reason for any loss in performance... I think.
     - If fetchHabits is needed, then consider using [this](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect)
+- General note on optimization: Each time you use an arrow function, it creates a new function each time the component renders, which may break optimizations based on strict identity comparison.
 - Maybe allow you to pull up a list of habit meta?
 - Finish email feature. Needs formatting, and a page or button.
 - Responsive size for all components:
@@ -31,3 +32,6 @@
     - Add page that is routed from the sign-in page that explains what this website is about.
     - MIGHT add a dark mode toggle in the sign in/ sign up page that doesn't rely on user's token to work
     - Remove user not found and invalid password message, replace with generic so that it can't be brute forced as easily.
+- Pruning
+    - Remove ProminentAppBar
+    - Consider whether we need theme toggle as a component or simply just move its code into the taskbar.

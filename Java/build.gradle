@@ -34,13 +34,15 @@ tasks.named('test') {
 tasks.register("jarRun"){
 	def login = project.findProperty("DB_LOGIN")
 	def pass = project.findProperty("DB_PASSWORD")
-	javaexec{
-		main="-jar"
-		args = [
-				'build/libs/' + project.group.substring(4) + "-" + project.version + ".jar",
-				'--DB_LOGIN='+login,
-				'--DB_PASSWORD='+pass
-		]
+	doLast{
+		javaexec{
+			main="-jar"
+			args = [
+					'build/libs/' + project.group.substring(4) + "-" + project.version + ".jar",
+					'--DB_LOGIN='+login,
+					'--DB_PASSWORD='+pass
+			]
+		}
 	}
 }
 
