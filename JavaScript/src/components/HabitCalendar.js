@@ -14,25 +14,25 @@ let daysCheckArray = [
 
 function DataConversion(habits) {
   let eventsArray = [];
-  habits.map((habit) => {
-
+  habits.forEach((habit) => {
     let nextDay;
-
-    habit.habitMetaList.map((habitMeta) => {
-
-      const habitMetaDate = new Date(habitMeta.dateOfCompletion);
-      nextDay = `${habitMetaDate.getFullYear()}-${(habitMetaDate.getMonth() + 1).toString().padStart(2, "0")}-${(habitMetaDate.getDate() + 1).toString().padStart(2, "0")}`;
-
+    const lastHabitMeta = habit.habitMetaList[habit.habitMetaList.length-1];
+    if(lastHabitMeta){
+      const habitMetaDate = new Date(lastHabitMeta.dateOfCompletion);
+      nextDay = `${habitMetaDate.getFullYear()}-${(habitMetaDate.getMonth() + 1).toString().padStart(2, "0")}-${(habitMetaDate.getDate() + 1).toString().padStart(2, "0")}`; 
+    } else {
+      nextDay = habit.startDate;
+    }
+    habit.habitMetaList.forEach((habitMeta) => {
       eventsArray.push({
         title: habit.name,
         start: habitMeta.dateOfCompletion,
         allDay: true,
         backgroundColor: habitMeta.completedHabit ? "#1BD835" : "#d81b60"
       })
-      
     })
     eventsArray.push({
-      startRecur: nextDay ? nextDay : habit.startDate,
+      startRecur: nextDay,
       title: habit.name,
       daysOfWeek: habit.selectedDays.map((day) => {
         return daysCheckArray.indexOf(day);

@@ -13,12 +13,12 @@ const divisions = [
   {name:"Diamond", color:"#b9f2ff", offColor:"black", id:6}
 ];
 const subDivisions = ["I. ", "II. ", "III."];
-const numDivisions = 7;
-const numBadges = 147;
-const numBadgesPerDivision = numBadges/numDivisions;
+const numBadges = 147; // change this to reflect the number of images you have labeled levelbadge##.png
+const scoreWeight = 50; //change this to adjust how many points per subdivision
+
+const numBadgesPerDivision = numBadges/divisions.length;
 const endSubDivisions = subDivisions.length-1;
 const widthSubDivision = (numBadgesPerDivision - 1) / (subDivisions.length-1);
-const scoreWeight = 50; //change this to adjust how many points per subdivision
 
 const getBadgeNameAndURL = (score) => {                                                                                     //examples: 20 * scoreWeight | 143 * scoreWeight
   const weightedScore = score / scoreWeight > numBadges ? numBadges : Math.floor(score / scoreWeight);                      //  = 20 | 143

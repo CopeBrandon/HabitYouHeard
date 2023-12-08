@@ -71,6 +71,7 @@ export default function SignInSide(props) {
             }}
             error={usernameHelperText === "User Not Found"}
             helperText={usernameHelperText}
+            autoComplete="username"
           />
           <TextField
             id="password-with-visibility-icon"
@@ -100,6 +101,7 @@ export default function SignInSide(props) {
             }}
             error={passwordHelperText === "Invalid Password!"}
             helperText={passwordHelperText}
+            autoComplete="current-password"
           >
           </TextField>
         </Stack>

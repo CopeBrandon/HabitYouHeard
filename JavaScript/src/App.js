@@ -1,16 +1,10 @@
+import React, { useEffect, useState } from "react";
 import { CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import AuthBackground from "./components/layouts/AuthBackground";
-import SignUp from "./pages//signup/SignUp";
-import CalendarView from "./pages/CalendarView";
-import HabitsPage from "./pages/HabitsPage";
-import Home from "./pages/Home";
-import Layout from "./pages/Layout";
-import SignIn from "./pages/SignIn";
-import Badges from "./pages/Badges";
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
+import { SignUp, CalendarView, HabitsPage, Home, SignIn, Badges } from "./pages/Pages";
 import Taskbar from "./components/Taskbar";
+import AuthBackground from "./components/layouts/AuthBackground";
 import { lightTheme, darkTheme } from "./palette/colors";
 
 function App() {
@@ -71,11 +65,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="*" element={(<Navigate replace to="/"/>)}/>
-          <Route path="/" element={user.token=== "" ? <Navigate replace to={"/auth/signin"}/>:<Layout/>}>
+          <Route path="/" element={user.token=== "" ? <Navigate replace to={"/auth/signin"}/>:<Outlet/>}>
             <Route index element=
               {
-              (<Home user={user} habits={habits} setHabits={setHabits}
-                > 
+              (<Home user={user} habits={habits} setHabits={setHabits}>
                 <Taskbar
                   darkMode={darkMode}
                   onToggleTheme={handleToggleTheme}

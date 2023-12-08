@@ -34,7 +34,6 @@
     - Remove user not found and invalid password message, replace with generic so that it can't be brute forced as easily.
     - Users can create multiple users with the same username and email, causing a problem.
 - Pruning
-    - Remove ProminentAppBar
     - Consider whether we need theme toggle as a component or simply just move its code into the taskbar.
 
 

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Stack, TextField } from "@mui/material/";
-import bcrypt from "bcryptjs";
 import { useNavigate } from "react-router";
-import AuthLayout from "../../components/layouts/AuthLayout";
+import AuthLayout from "../components/layouts/AuthLayout";
 
-const salt = bcrypt.genSaltSync(10);
+//import bcrypt from "bcryptjs";
+//const salt = bcrypt.genSaltSync(10); 
+//Not sure why salt exists but I'm leaving this here in case I need to use it somehow?
 
 const SignUp = () => {
   const [response, setResponse] = useState("");
-  let formSubmitted = false;
   const [emailHelperText, setEmailHelperText] = useState("");
   const [emailHasError, setEmailHasError] = useState(false);
   const navigate = useNavigate();
@@ -68,14 +68,14 @@ const SignUp = () => {
     }
   }
   // TODO: Create separate password and verify password handlers, basically only needs to verify whether it's the same as the first password
-  function handlePasswordChange(e){
-    const updatedValue = e.target.value;
-    setPasswordHelperText(getPasswordValidationMessage(updatedValue));
-    setUser((user) => ({
-      ...user,
-      password: updatedValue
-    }));
-  }
+  // function handlePasswordChange(e){
+  //   const updatedValue = e.target.value;
+  //   setPasswordHelperText(getPasswordValidationMessage(updatedValue));
+  //   setUser((user) => ({
+  //     ...user,
+  //     password: updatedValue
+  //   }));
+  // }
 
   function getEmailValidationMessage(email) {
     if (email === "") {
@@ -102,7 +102,6 @@ const SignUp = () => {
 
   const handleSignUp = (event) => {
     event.preventDefault();
-    formSubmitted = true;
     const emailValidationText = getEmailValidationMessage(user.email);
     const usernameValidationText = getUsernameValidationMessage(user.username);
     const passWordValidationText = getPasswordValidationMessage(user.password);
@@ -157,6 +156,7 @@ const SignUp = () => {
           onChange={(e) =>handleEmailChange(e)}
           error={emailHasError}
           helperText={emailHelperText}
+          autoComplete="email"
         />
         <TextField
           label="Username"
@@ -165,6 +165,7 @@ const SignUp = () => {
           onChange={(e)=>handleUsernameChange(e)}
           error={usernameHasError}
           helperText={usernameHelperText}
+          autoComplete="username"
         />
         <TextField
           label="Password"
@@ -180,6 +181,7 @@ const SignUp = () => {
           }}
           error={passwordHasError}
           helperText={passwordHelperText}
+          autoComplete="new-password"
         />
         <TextField
           label="Verify Password"
@@ -195,6 +197,7 @@ const SignUp = () => {
           }}
           error={passwordHasError}
           helperText={passwordHelperText}
+          autoComplete="new-password"
         />
       </Stack>
     </AuthLayout>
