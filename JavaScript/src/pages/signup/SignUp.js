@@ -100,7 +100,8 @@ const SignUp = () => {
     }));
   }
 
-  const handleSignUp = () => {
+  const handleSignUp = (event) => {
+    event.preventDefault();
     formSubmitted = true;
     const emailValidationText = getEmailValidationMessage(user.email);
     const usernameValidationText = getUsernameValidationMessage(user.username);
@@ -142,9 +143,9 @@ const SignUp = () => {
   });
 
   return (
+    <form onSubmit={handleSignUp}>
     <AuthLayout
       title="Create Account"
-      buttonHandler={handleSignUp}
       linkPath="/auth/signin"
       linkTitle="Already have an account? Sign In"
     >
@@ -197,6 +198,7 @@ const SignUp = () => {
         />
       </Stack>
     </AuthLayout>
+    </form>
   );
 };
 export default SignUp;

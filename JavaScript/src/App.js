@@ -10,6 +10,8 @@ import Home from "./pages/Home";
 import Layout from "./pages/Layout";
 import SignIn from "./pages/SignIn";
 import Badges from "./pages/Badges";
+import Taskbar from "./components/Taskbar";
+import { lightTheme, darkTheme } from "./palette/colors";
 
 function App() {
   const [user, setUser] = useState(localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {token: ""});
@@ -36,104 +38,88 @@ function App() {
         }) 
   };
 
-  const colors = {
-    blues: {
-      main: '#4175cf',
-      light: '#4b95f1',
-      dark: '#33469c'
-    },
-    purples: {
-      main: '#9c27b0',
-      light: "#af52bf",
-      dark: "#6d1b7b"
-    },
-    greys: {
-      main: "#34373d",
-      light: "#52555c",
-      dark: "#14171d"
-    }
-  }
-
   const theme = createTheme(({
     palette: {
       mode: darkMode ? "dark": "light",
       ...(!darkMode
-        ? {
-          primary: colors.blues,
-          secondary: colors.purples,
-          overlay: colors.blues.dark,
-        }:{
-          primary: colors.purples,
-          secondary: colors.blues,
-          overlay: colors.purples.main,
-          background: {
-            default: colors.greys.dark,
-            paper: colors.greys.main,
-          }
-        })
+        ? lightTheme : darkTheme)
     }
-    
   }));
-
-  const fetchHabits = () => {
-    if(user.token === "") return;
-    fetch("http://localhost:8080/api/habits/", {
-      headers: {
-        Authorization: user.token,
-      },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setHabits(data.sort((a, b) => a.id - b.id));
-      });
-  };
-
   useEffect(() => {
-    fetchHabits();
     localStorage.setItem("user", JSON.stringify(user));
-  }, [user]);
+    const fetchHabits = async () => {
+      if(user.token === "") return;
+      fetch("http://localhost:8080/api/habits/", {
+        headers: {
+          Authorization: user.token,
+        },
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          setHabits(data.sort((a, b) => a.id - b.id));
+        });
+    };
+    fetchHabits();
+  },
+  [user]);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route
-              index
-              element={
-                  user.token !== "" ? (
-                    <Home
+          <Route path="*" element={(<Navigate replace to="/"/>)}/>
+          <Route path="/" element={user.token=== "" ? <Navigate replace to={"/auth/signin"}/>:<Layout/>}>
+            <Route index element=
+              {
+              (<Home user={user} habits={habits} setHabits={setHabits}
+                > 
+                <Taskbar
+                  darkMode={darkMode}
+                  onToggleTheme={handleToggleTheme}
+                  user={user}//only needs because user.username
+                  setUser={setUser}//only needs because i havent moved handleSignout to app.js yet
+                  setHabits={setHabits}//same for this
+                  contentType="date"
+                  endButtons={[
+                    {link:"/calendar", content:"Calendar", id:0},
+                    {link:"/badges", content: "Badges", id:1}
+                  ]}
+                />
+                </Home>)}
+            />
+            <Route path="badges" element={
+              <Badges 
+                habits={habits} 
+                darkMode={darkMode}>
+                  <Taskbar
+                    darkMode={darkMode}
                     onToggleTheme={handleToggleTheme}
                     user={user}
                     setUser={setUser}
-                    habits={habits}
                     setHabits={setHabits}
+                    contentType="points"
+                    points={user.points}
+                    endButtons={[{link:"/calendar", content:"Calendar", id: 0}]}
+                  />
+              </Badges>
+              }/>
+            <Route path="calendar" element={
+              <CalendarView 
+                habits={habits}>
+                  <Taskbar
                     darkMode={darkMode}
-                  
-                  />                  ) : (
-                    <Navigate replace to={"/auth/signin"} />
-                  )
-                }
-              
-            />
-
-            <Route path="badges" element={<Badges 
-              user={user} 
-              habits={habits} 
-              darkMode={darkMode} 
-              onToggleTheme={handleToggleTheme}
-              setUser={setUser}
-              setHabits={setHabits}/>} />
-            <Route path="calendar" element={<CalendarView 
-              user={user} 
-              habits={habits}
-              darkMode={darkMode}
-              onToggleTheme={handleToggleTheme}
-              setUser={setUser}
-              setHabits={setHabits} />} />
+                    onToggleTheme={handleToggleTheme}
+                    user={user}
+                    setUser={setUser}
+                    setHabits={setHabits}
+                    contentType="date"
+                    endButtons={[{link:"/badges", content:"Badges", id:0}]}
+                  />
+                </CalendarView>
+              }/>
             <Route
               path="habitsPage"
               element={

@@ -32,6 +32,17 @@
     - Add page that is routed from the sign-in page that explains what this website is about.
     - MIGHT add a dark mode toggle in the sign in/ sign up page that doesn't rely on user's token to work
     - Remove user not found and invalid password message, replace with generic so that it can't be brute forced as easily.
+    - Users can create multiple users with the same username and email, causing a problem.
 - Pruning
     - Remove ProminentAppBar
     - Consider whether we need theme toggle as a component or simply just move its code into the taskbar.
+
+
+- Notes from the DOM:
+    - [DOM] Input elements should have autocomplete attributes (suggested: "new-password"): (More info: https://goo.gl/9p2vKq) <input aria-invalid=​"false" id=​":​r5:​" type=​"password" class=​"MuiInputBase-input MuiInput-input css-1x51dt5-MuiInputBase-input-MuiInput-input" value>​
+signup:1 
+
+    - [DOM] Input elements should have autocomplete attributes (suggested: "new-password"): (More info: https://goo.gl/9p2vKq) <input aria-invalid=​"false" id=​":​r7:​" type=​"password" class=​"MuiInputBase-input MuiInput-input css-1x51dt5-MuiInputBase-input-MuiInput-input" value>​
+signin:1 
+
+    - [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) <input aria-invalid=​"false" id=​"password-with-visibility-icon" type=​"password" class=​"MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input" value>​

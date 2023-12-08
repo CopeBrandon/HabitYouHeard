@@ -39,7 +39,7 @@ function AuthLayout(props) {
               alignItems: "center",
             }}
           >
-            <CircleButton variant="contained" onClick={props.buttonHandler}>
+            <CircleButton variant="contained" type="submit">
               <ArrowForwardIcon fontSize="large" sx={{ fontSize: 48 }} />
             </CircleButton>
           </Grid>

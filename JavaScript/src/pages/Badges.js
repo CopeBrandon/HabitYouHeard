@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import Grid from "@mui/material/Unstable_Grid2";
-import Taskbar from "../components/Taskbar";
 import HabitBadgeProgress from '../components/HabitBadgeProgress';
 
 const divisions = [
@@ -19,7 +18,7 @@ const numBadges = 147;
 const numBadgesPerDivision = numBadges/numDivisions;
 const endSubDivisions = subDivisions.length-1;
 const widthSubDivision = (numBadgesPerDivision - 1) / (subDivisions.length-1);
-const scoreWeight = 50;
+const scoreWeight = 50; //change this to adjust how many points per subdivision
 
 const getBadgeNameAndURL = (score) => {                                                                                     //examples: 20 * scoreWeight | 143 * scoreWeight
   const weightedScore = score / scoreWeight > numBadges ? numBadges : Math.floor(score / scoreWeight);                      //  = 20 | 143
@@ -40,7 +39,7 @@ const getStreakMessage = (streak) => {
   return streak > 0 ? `${streak} day streak!`: "No streak yet."
 }
 
-const Badges = ({habits, user, darkMode, onToggleTheme, setHabits, setUser}) => {
+const Badges = ({habits, darkMode, children}) => {
   return (
   <Box sx={{
     backgroundImage: `url(backgroun.png)`,
@@ -48,18 +47,7 @@ const Badges = ({habits, user, darkMode, onToggleTheme, setHabits, setUser}) => 
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
   }}>
-    <Taskbar 
-      points={user.points}
-      darkMode={darkMode} 
-      onToggleTheme={onToggleTheme}
-      setUser={setUser}
-      setHabits={setHabits}
-      contentType="points"
-      bubbleLink="/"
-      endButtons={[
-        {link:"/calendar", content:"Calendar", id: 0}
-      ]}
-    />
+    {children}{/*Taskbar*/}
     <Grid container justifyContent="center" alignItems="center" margin="0px" 
           rowSpacing={4}
           columnSpacing={8}
