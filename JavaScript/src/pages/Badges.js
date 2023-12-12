@@ -53,7 +53,7 @@ const Badges = ({habits, darkMode, children}) => {
           columnSpacing={8}
     >
       {habits.map((habit) => (
-          <HabitBadgeProgress 
+          <HabitBadgeProgress
             title={habit.name}
             description={habit.description}
             badgeMeta={getBadgeNameAndURL(habit.pointValue)}

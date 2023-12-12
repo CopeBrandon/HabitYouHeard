@@ -1,6 +1,7 @@
 # Things I'd Change
 - Top priority: Fix useEffect running "fetchHabits" every time page resets, massive reason for any loss in performance... I think.
     - If fetchHabits is needed, then consider using [this](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect)
+- Taskbar sends you back to the previous page using the back button, I don't know if that's the right functionality.
 - General note on optimization: Each time you use an arrow function, it creates a new function each time the component renders, which may break optimizations based on strict identity comparison.
 - Maybe allow you to pull up a list of habit meta?
 - Finish email feature. Needs formatting, and a page or button.
@@ -24,6 +25,7 @@
 - Home page related stuff:
     - Display home page message if user has no habits.
     - Page looks sparse when few habits.
+    - Every time that a habit is affirmed, the database is queried for a list of habits. Seems unnecessary. Doesn't do that for the dailyhabits page.
 - Sign in related stuff:
     - Color styling to make it stand out more.
     - Change password.

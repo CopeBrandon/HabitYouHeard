@@ -94,7 +94,6 @@ function App() {
                     setUser={setUser}
                     setHabits={setHabits}
                     contentType="points"
-                    points={user.points}
                     endButtons={[{link:"/calendar", content:"Calendar", id: 0}]}
                   />
               </Badges>

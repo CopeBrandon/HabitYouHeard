@@ -6,6 +6,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Popover from "@mui/material/Popover";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
+import { Typography } from "@mui/material";
 
 import { styled } from "@mui/system";
 
@@ -13,8 +14,7 @@ const StyledButton = styled(Button)({
   height: 100,
 });
 
-export default function AddHabit({ habit, name, buttonHandler }) {
-
+export default function AddHabit({ habit, buttonHandler }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -26,17 +26,25 @@ export default function AddHabit({ habit, name, buttonHandler }) {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
+  
+  const removeButtonStr = "removeButton"+habit.id;
+  const descButtonStr = "descButton"+habit.id;
 
+  const removeOpen = (anchorEl === document.getElementById(removeButtonStr)) && Boolean(anchorEl);
+  const descOpen = (anchorEl === document.getElementById(descButtonStr)) && Boolean(anchorEl);
+
+  const id = open ? "simple-popover" : undefined;
+    
   return (
-    <ButtonGroup variant="contained">
-      <StyledButton size="small">
-        <IconButton component="div" size="large" onClick={handleClick}>
-          <DeleteIcon fontSize="large" />
+    <ButtonGroup variant="contained" aria-aria-describedby={id}>
+      <StyledButton size="small" onClick={handleClick} id={removeButtonStr}>
+        <IconButton component="div" size="large" >
+          <DeleteIcon fontSize="large"/>
         </IconButton>
-        <Popover
+      </StyledButton>
+      <Popover
           id={id}
-          open={open}
+          open={removeOpen}
           anchorEl={anchorEl}
           onClose={handleClose}
           anchorOrigin={{
@@ -48,7 +56,6 @@ export default function AddHabit({ habit, name, buttonHandler }) {
             severity="warning"
             action={
               <Button
-                color="inherit"
                 size="small"
                 onClick={() => buttonHandler(habit.id)}
               >
@@ -60,9 +67,20 @@ export default function AddHabit({ habit, name, buttonHandler }) {
             You are about to delete a habit.
           </Alert>
         </Popover>
+      <StyledButton sx={{ width: 250 }} onClick={handleClick} id={descButtonStr}>
+        {habit.name}
       </StyledButton>
-
-      <StyledButton sx={{ width: 250 }}>{name}</StyledButton>
+      <Popover
+        id={id}
+        open={descOpen}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+      }}>
+        <Typography sx={{p:2}}>{habit.description}</Typography>
+      </Popover>
     </ButtonGroup>
   );
 }

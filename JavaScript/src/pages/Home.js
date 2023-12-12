@@ -7,7 +7,6 @@ export default function Home({ habits, setHabits, user, children}) {
   const current = new Date();
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const todaysHabits = habits.filter((habit) => habit.selectedDays.includes(days[current.getDay()]));
-
   return (
     <>
       {children}{/*Taskbar*/}

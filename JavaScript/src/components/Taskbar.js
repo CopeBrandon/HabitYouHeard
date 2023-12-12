@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack"
-import { Link, Navigate, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ArrowBack } from "@mui/icons-material";
 import LinkButton from "./LinkButton";
 import { Grid, AppBar, Paper , Button } from "@mui/material";
@@ -14,7 +14,7 @@ const StyledDiv = styled("div")(() => ({
     justifyContent: "center",
 }));
 
-export default function Taskbar({points, darkMode, onToggleTheme, user, setUser, setHabits, contentType, endButtons}){
+export default function Taskbar({darkMode, onToggleTheme, user, setUser, setHabits, contentType, endButtons}){
     const navigate = useNavigate();
     const locationPath = useLocation().pathname;
     const handleSignout = () => {
