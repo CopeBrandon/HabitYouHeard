@@ -31,7 +31,8 @@ export default function SignInSide(props) {
   }
 
 
-  const handleLogin = () => {
+  const handleLogin = (event) => {
+    event.preventDefault();
     fetchToken().then((response) => {
       if (response.token) {
         setPasswordHelperText("");
@@ -49,58 +50,62 @@ export default function SignInSide(props) {
   };
 
   return (
-    <AuthLayout
-      title="Welcome Back!"
-      buttonHandler={handleLogin}
-      linkPath="/auth/signup"
-      linkTitle="Sign Up"
-    >
-      <Stack spacing={3} maxWidth={800}>
-        <TextField
-          label="Username"
-          variant="standard"
-          value={userLoggingIn.username}
-          onChange={(e) => {
-            let updatedValue = { username: e.target.value };
-            setUserLoggingIn((userLoggingIn) => ({
-              ...userLoggingIn,
-              ...updatedValue,
-            }));
-          }}
-          error={usernameHelperText === "User Not Found"}
-          helperText={usernameHelperText}
-        />
-        <TextField
-          id="password-with-visibility-icon"
-          label="Password"
-          variant="standard"
-          type={showPassword ? "text" : "password"}
-          value={userLoggingIn.password}
-          onChange={(e) => {
-            let updatedValue = { password: e.target.value };
-            setUserLoggingIn((userLoggingIn) => ({
-              ...userLoggingIn,
-              ...updatedValue,
-            }));
-          }}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  edge="end"
-                >{/*TODO: handleMouseDown event? no idea why i need to preventDefault for this...*/}
-                  {showPassword ? <VisibilityOff/> : <Visibility/>}
-                </IconButton>
-              </InputAdornment>
-            )
-          }}
-          error={passwordHelperText === "Invalid Password!"}
-          helperText={passwordHelperText}
-        >
-        </TextField>
-      </Stack>
-    </AuthLayout>
+    <form onSubmit={handleLogin}>
+      <AuthLayout
+        title="Welcome Back!"
+        buttonHandler={handleLogin}
+        linkPath="/auth/signup"
+        linkTitle="Sign Up"
+      >
+        <Stack spacing={3} maxWidth={800}>
+          <TextField
+            label="Username"
+            variant="standard"
+            value={userLoggingIn.username}
+            onChange={(e) => {
+              let updatedValue = { username: e.target.value };
+              setUserLoggingIn((userLoggingIn) => ({
+                ...userLoggingIn,
+                ...updatedValue,
+              }));
+            }}
+            error={usernameHelperText === "User Not Found"}
+            helperText={usernameHelperText}
+            autoComplete="username"
+          />
+          <TextField
+            id="password-with-visibility-icon"
+            label="Password"
+            variant="standard"
+            type={showPassword ? "text" : "password"}
+            value={userLoggingIn.password}
+            onChange={(e) => {
+              let updatedValue = { password: e.target.value };
+              setUserLoggingIn((userLoggingIn) => ({
+                ...userLoggingIn,
+                ...updatedValue,
+              }));
+            }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    edge="end"
+                  >{/*TODO: handleMouseDown event? no idea why i need to preventDefault for this...*/}
+                    {showPassword ? <VisibilityOff/> : <Visibility/>}
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
+            error={passwordHelperText === "Invalid Password!"}
+            helperText={passwordHelperText}
+            autoComplete="current-password"
+          >
+          </TextField>
+        </Stack>
+      </AuthLayout>
+    </form>
   );
 }

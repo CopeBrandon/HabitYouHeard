@@ -46,7 +46,7 @@ export default function HabitsPage({ habits, setHabits, user }) {
     })
       .then((res) => res.text())
       .then(() => {
-        const newHabitArray = habits.filter((habit) => habit.id != habitId);
+        const newHabitArray = habits.filter((habit) => habit.id !== habitId);
         setHabits([...newHabitArray].sort((a, b) => a.id - b.id));
       });
   };
@@ -148,7 +148,6 @@ export default function HabitsPage({ habits, setHabits, user }) {
         {habits.map((habit) => (
           <Grid key={habit.id} xs={6} display="flex" justifyContent="center">
             <AddHabit
-              name={habit.name}
               habit={habit}
               buttonHandler={handleStopHabit}
             ></AddHabit>

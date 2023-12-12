@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack"
-import { Link, Navigate, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ArrowBack } from "@mui/icons-material";
 import LinkButton from "./LinkButton";
 import { Grid, AppBar, Paper , Button } from "@mui/material";
@@ -14,20 +14,22 @@ const StyledDiv = styled("div")(() => ({
     justifyContent: "center",
 }));
 
-export default function Taskbar({points, darkMode, onToggleTheme, user, setUser, setHabits, contentType, bubbleLink, endButtons}){
+export default function Taskbar({darkMode, onToggleTheme, user, setUser, setHabits, contentType, endButtons}){
     const navigate = useNavigate();
+    const locationPath = useLocation().pathname;
     const handleSignout = () => {
         setUser({token: ""})
         onToggleTheme(true);
         setHabits([])
-        navigate("/auth/signin")
     }
-    let bubbleContent;
+    let bubbleContent, bubbleLink;
     if(contentType ==="date"){
+        bubbleLink = locationPath === "/calendar" ? "/" : "calendar"; 
         const date = new Date();
         bubbleContent = () => `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
     } else if(contentType === "points"){
-        bubbleContent = () => {return (<><u>Points</u><br/>{points}</>)}
+        bubbleLink="/";
+        bubbleContent = () => {return (<><u>Points</u><br/>{user.points}</>)}
     }
     const componentElevation = () => !darkMode ? 5 : 0;
 
@@ -38,7 +40,7 @@ export default function Taskbar({points, darkMode, onToggleTheme, user, setUser,
                 height:70,
             }}  display="flex"
             >
-                {useLocation().pathname === "/" ?
+                {locationPath === "/" ?
                     <Typography
                         variant="h4"
                         noWrap
@@ -78,7 +80,7 @@ export default function Taskbar({points, darkMode, onToggleTheme, user, setUser,
                 }
             </Grid>
             <Grid item xs={4}>
-                <Link to={bubbleLink} textDecoration="none"> {/*to={bubbleLink*/}
+                <Link to={bubbleLink} textDecoration="none">
                     <StyledDiv>
                         <Paper
                         elevation={componentElevation()}
