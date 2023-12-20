@@ -46,13 +46,13 @@ public class HabitsController {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
         Optional<User> userReference = userRepository.findByAuthToken(authToken);
-
         if (!userReference.isPresent()) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 
         User user = (User) userReference.get();
         List<Habit> activeHabits = habitRepository.findAllActiveHabits(user.getId());
+        System.out.println(activeHabits);
         return ResponseEntity.ok().body(activeHabits);
 
     }

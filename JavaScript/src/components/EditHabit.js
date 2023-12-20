@@ -14,7 +14,7 @@ const StyledButton = styled(Button)({
   height: 100,
 });
 
-export default function AddHabit({ habit, buttonHandler }) {
+export default function EditHabit({ habit, buttonHandler }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -24,6 +24,10 @@ export default function AddHabit({ habit, buttonHandler }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleStopHabit = () => {
+    buttonHandler(habit.id);
+  }
 
   const open = Boolean(anchorEl);
   
@@ -36,7 +40,7 @@ export default function AddHabit({ habit, buttonHandler }) {
   const id = open ? "simple-popover" : undefined;
     
   return (
-    <ButtonGroup variant="contained" aria-aria-describedby={id}>
+    <ButtonGroup variant="contained" >
       <StyledButton size="small" onClick={handleClick} id={removeButtonStr}>
         <IconButton component="div" size="large" >
           <DeleteIcon fontSize="large"/>
@@ -57,7 +61,7 @@ export default function AddHabit({ habit, buttonHandler }) {
             action={
               <Button
                 size="small"
-                onClick={() => buttonHandler(habit.id)}
+                onClick={handleStopHabit}
               >
                 Stop
               </Button>
@@ -75,11 +79,20 @@ export default function AddHabit({ habit, buttonHandler }) {
         open={descOpen}
         anchorEl={anchorEl}
         onClose={handleClose}
+        sx={{alignContent:"center"}}
+        transformOrigin={{
+          horizontal:'center',
+          vertical:"top"
+        }}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "left",
+          horizontal: "center",
       }}>
-        <Typography sx={{p:2}}>{habit.description}</Typography>
+        <Typography 
+          sx={{p:2, width:250, wordWrap:"break-word", textAlign:"center"}}
+        >
+          {habit.description}
+        </Typography>
       </Popover>
     </ButtonGroup>
   );

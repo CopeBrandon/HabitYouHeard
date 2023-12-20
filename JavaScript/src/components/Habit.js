@@ -59,7 +59,7 @@ function Habit({ habits, setHabits, habit, user }) {
   }
 
   return (
-    <ButtonGroup variant="contained">
+    <ButtonGroup variant="contained" >
       <StyledButton size="small">
         <Checkbox
           onChange={(event) => {

@@ -34,7 +34,7 @@ export default function Taskbar({darkMode, onToggleTheme, user, setUser, setHabi
     const componentElevation = () => !darkMode ? 5 : 0;
 
     return (
-    <AppBar sx={{marginBottom: "120px"}} position="static" elevation={0}>
+    <AppBar sx={{marginBottom: "80px"}} position="static" elevation={0}>
         <Grid container>
             <Grid item xs={4} sx={{
                 height:70,
@@ -52,7 +52,7 @@ export default function Taskbar({darkMode, onToggleTheme, user, setUser, setHabi
                     <Paper
                         elevation={0}
                         sx={{
-                            backgroundColor: "primary.main",
+                            backgroundColor: "secondary.dark",
                             display: "flex",
                             width: 130,
                             height: 130,

@@ -4,7 +4,7 @@ import { ArrowBack, Add } from "@mui/icons-material";
 import { TextField, Typography, Box, Checkbox, Fab, FormControl, InputLabel, ListItemText, MenuItem, 
   OutlinedInput, Select, Stack} from '@mui/material';
 import Grid from "@mui/material/Unstable_Grid2";
-import AddHabit from "../components/AddHabit";
+import EditHabit from "../components/EditHabit";
 
 
 const days = [
@@ -144,13 +144,17 @@ export default function HabitsPage({ habits, setHabits, user }) {
         </Grid>
       </Grid>
 
-      <Grid container spacing={2} marginTop="20px" disableEqualOverflow="true">
+      {/* <Grid container spacing={2} marginTop="20px" disableEqualOverflow="true"> */}
+      <Grid container justifyContent="center" margin="0px" marginTop="16px"
+        rowSpacing={4}
+        columnSpacing={8}
+      >
         {habits.map((habit) => (
-          <Grid key={habit.id} xs={6} display="flex" justifyContent="center">
-            <AddHabit
+          <Grid key={habit.id} xs={10} md={6} lg={3.5} display="flex" justifyContent="center">
+            <EditHabit
               habit={habit}
               buttonHandler={handleStopHabit}
-            ></AddHabit>
+            ></EditHabit>
           </Grid>
         ))}
       </Grid>

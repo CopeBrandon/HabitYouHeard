@@ -31,7 +31,7 @@ const getBadgeNameAndURL = (score) => {                                         
     imgUrl: "/badgeicons/levelbadge" + weightedScore + ".png",
     rank: rank,
     color: division.color,
-    offColor: division.offColor
+    offColor: division.offColor,
   };
 }
 
@@ -48,7 +48,7 @@ const Badges = ({habits, darkMode, children}) => {
     backgroundPosition: "center",
   }}>
     {children}{/*Taskbar*/}
-    <Grid container justifyContent="center" alignItems="center" margin="0px" 
+    <Grid container sx={{justifyContent:"center", margin:"0px", paddingTop:"32px" }}
           rowSpacing={4}
           columnSpacing={8}
     >
@@ -58,7 +58,6 @@ const Badges = ({habits, darkMode, children}) => {
             description={habit.description}
             badgeMeta={getBadgeNameAndURL(habit.pointValue)}
             streakLength={getStreakMessage(habit.streak)}
-            score={habit.pointValue}
             darkMode={darkMode}
             key={habit.id}
           />

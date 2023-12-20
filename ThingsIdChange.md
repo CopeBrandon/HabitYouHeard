@@ -20,7 +20,7 @@
     - Calendar styling. Today button is lower case??? Make it smaller on the page with some padding.
     - Display inactive habits with a toggle, and allow the user to reactivate or permanently disable them.
     - Possibly allow users to see inactive habitmeta in the calendar.
-    - Method to build calendar is slow, might be intrinsic to full calendar, though.(look into only building the calendar once on navigation)
+    - !!!Method to build calendar is slow, might be intrinsic to full calendar, though.!!!
     - Consider how to add a weekly calendar.
 - Home page related stuff:
     - Display home page message if user has no habits.
@@ -37,13 +37,3 @@
     - Users can create multiple users with the same username and email, causing a problem.
 - Pruning
     - Consider whether we need theme toggle as a component or simply just move its code into the taskbar.
-
-
-- Notes from the DOM:
-    - [DOM] Input elements should have autocomplete attributes (suggested: "new-password"): (More info: https://goo.gl/9p2vKq) <input aria-invalid=​"false" id=​":​r5:​" type=​"password" class=​"MuiInputBase-input MuiInput-input css-1x51dt5-MuiInputBase-input-MuiInput-input" value>​
-signup:1 
-
-    - [DOM] Input elements should have autocomplete attributes (suggested: "new-password"): (More info: https://goo.gl/9p2vKq) <input aria-invalid=​"false" id=​":​r7:​" type=​"password" class=​"MuiInputBase-input MuiInput-input css-1x51dt5-MuiInputBase-input-MuiInput-input" value>​
-signin:1 
-
-    - [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) <input aria-invalid=​"false" id=​"password-with-visibility-icon" type=​"password" class=​"MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input" value>​
