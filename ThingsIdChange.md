@@ -3,6 +3,9 @@
     - If fetchHabits is needed, then consider using [this](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect)
 - Taskbar sends you back to the previous page using the back button, I don't know if that's the right functionality.
 - General note on optimization: Each time you use an arrow function, it creates a new function each time the component renders, which may break optimizations based on strict identity comparison.
+- Restructure handlers into a singular file that allows you to pull in what you need. 
+    - One of the problems with this setup is that react only allows handlers to accept events, you'd need to make a tailored handler that utilizes the generic ones. Only thing you could do to fix this that I can imagine is having state be centralized to the handlers.js file. [ APPARENTLY PEOPLE DO THIS AND THEY USE DISPATCHERS???]
+- Similar to handlers, restructure styled components to fit under one banner.
 - Maybe allow you to pull up a list of habit meta?
 - Finish email feature. Needs formatting, and a page or button.
 - Responsive size for all components:
@@ -12,6 +15,7 @@
     - Appbar gets taller as aspect ratio decreases, might require javascript to calculate whenever viewport changes?
     - Appbar back button needs to be centered better.
     - Possibly add a dropdown if aspect ratio decreases instead of the above.
+    - Rework the Menu component in the HabitsPage for selecting days an Popper with a MenuList instead, would allow for scrolling, responsive sizing without covering the button, etc.
 - Rework getBadgeNameAndURL function to call an instance of an object that contains all data instead of using a series of arrays.
     - Basically, have a "Badge class" that contains the division, its colors, number, ranking in the division, and imgurl
 - Calendar related stuff:

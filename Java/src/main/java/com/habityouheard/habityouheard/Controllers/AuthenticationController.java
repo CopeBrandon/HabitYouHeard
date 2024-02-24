@@ -27,13 +27,11 @@ public class AuthenticationController {
     public ResponseEntity<Object> provideUserData(@RequestBody Map<String, String> json) {
         Optional<User> optUser = userRepository.findByUsername(json.get("username"));
         Map<String,String> responseBody = new HashMap<>();
-
         if(optUser.isPresent()){
 
             User user = (User) optUser.get();
 
-
-            if(BCrypt.checkpw(json.get("password"),user.getPassword())){
+            if(BCrypt.checkpw(json.get("password"), user.getPassword())){
 
                 String date = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
                 String hashCode = BCrypt.hashpw(date + user.getUsername() ,BCrypt.gensalt(10));
@@ -44,7 +42,6 @@ public class AuthenticationController {
                 responseBody.put("username", user.getUsername());
                 responseBody.put("points", String.valueOf(user.getPoints()));
                 responseBody.put("darkMode", String.valueOf(user.isDarkMode()));
-
                 userRepository.save(user);
                 return new ResponseEntity<>(responseBody, HttpStatus.OK);
             }

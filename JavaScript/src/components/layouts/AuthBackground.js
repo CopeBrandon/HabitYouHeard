@@ -5,7 +5,7 @@ function AuthBackground(props) {
   return (
     <div
       style={{
-        backgroundImage: `url("https://cdn.discordapp.com/attachments/1004931241138737212/1007071579206860931/Untitled162_20220810184229.png")`,
+        backgroundImage: `url("/background3.png")`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",

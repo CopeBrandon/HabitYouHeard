@@ -36,6 +36,14 @@ public interface HabitRepository extends JpaRepository<Habit, Integer> {
     @Query(value = "SELECT * FROM habit WHERE is_active=0 AND user_id = ?1", nativeQuery = true)
     List<Habit> findAllInactiveHabits(@Param("userId") int userId);
 
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE habit SET description=?3 WHERE user_id = ?1 AND id=?2", nativeQuery = true)
+    void updateDescription(@Param("userId") int userId, @Param("id") int id, String description);
+
+    @Query(value = "SELECT * FROM habit WHERE user_id=?1 AND id=?2", nativeQuery = true)
+    List<Habit> findHabitByUserAndId(@Param("userId") int userId, @Param("id") int id);
+
    @Transactional
    @Query(value = "SELECT h.id FROM habit AS h INNER JOIN habit_selected_days AS hs ON h.id = hs.habit_id INNER JOIN habit_meta AS hm ON h.id = hm.habit_id WHERE hs.selected_days LIKE DAYNAME(CURDATE()) AND NOT DATE(hm.date_of_completion) = DATE(CURDATE())", nativeQuery = true)
     List<Integer> findAllUnaffirmedScheduledHabitsForDay();
