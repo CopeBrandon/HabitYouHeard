@@ -1,8 +1,13 @@
 # Things I'd Change
 - Top priority: Fix useEffect running "fetchHabits" every time page resets, massive reason for any loss in performance... I think.
     - If fetchHabits is needed, then consider using [this](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect)
+- Create landing page for users not signed in.
+- History page that displays most successful, least successful habits. 
 - Taskbar sends you back to the previous page using the back button, I don't know if that's the right functionality.
 - General note on optimization: Each time you use an arrow function, it creates a new function each time the component renders, which may break optimizations based on strict identity comparison.
+- Restructure handlers into a singular file that allows you to pull in what you need. 
+    - One of the problems with this setup is that react only allows handlers to accept events, you'd need to make a tailored handler that utilizes the generic ones. Only thing you could do to fix this that I can imagine is having state be centralized to the handlers.js file. [ APPARENTLY PEOPLE DO THIS AND THEY USE DISPATCHERS???]
+- Similar to handlers, restructure styled components to fit under one banner.
 - Maybe allow you to pull up a list of habit meta?
 - Finish email feature. Needs formatting, and a page or button.
 - Responsive size for all components:
@@ -12,6 +17,7 @@
     - Appbar gets taller as aspect ratio decreases, might require javascript to calculate whenever viewport changes?
     - Appbar back button needs to be centered better.
     - Possibly add a dropdown if aspect ratio decreases instead of the above.
+    - Rework the Menu component in the HabitsPage for selecting days an Popper with a MenuList instead, would allow for scrolling, responsive sizing without covering the button, etc.
 - Rework getBadgeNameAndURL function to call an instance of an object that contains all data instead of using a series of arrays.
     - Basically, have a "Badge class" that contains the division, its colors, number, ranking in the division, and imgurl
 - Calendar related stuff:
@@ -20,12 +26,13 @@
     - Calendar styling. Today button is lower case??? Make it smaller on the page with some padding.
     - Display inactive habits with a toggle, and allow the user to reactivate or permanently disable them.
     - Possibly allow users to see inactive habitmeta in the calendar.
-    - Method to build calendar is slow, might be intrinsic to full calendar, though.(look into only building the calendar once on navigation)
+    - !!!Method to build calendar is slow, might be intrinsic to full calendar, though.!!!
     - Consider how to add a weekly calendar.
 - Home page related stuff:
-    - Display home page message if user has no habits.
+    - Display that this is "Today's Habits" on the page.
     - Page looks sparse when few habits.
     - Every time that a habit is affirmed, the database is queried for a list of habits. Seems unnecessary. Doesn't do that for the dailyhabits page.
+    - Have noise play when habit is affirmed.
 - Sign in related stuff:
     - Color styling to make it stand out more.
     - Change password.
@@ -34,16 +41,6 @@
     - Add page that is routed from the sign-in page that explains what this website is about.
     - MIGHT add a dark mode toggle in the sign in/ sign up page that doesn't rely on user's token to work
     - Remove user not found and invalid password message, replace with generic so that it can't be brute forced as easily.
-    - Users can create multiple users with the same username and email, causing a problem.
+    - !!!Users can create multiple users with the same username and email, causing a problem.!!!
 - Pruning
     - Consider whether we need theme toggle as a component or simply just move its code into the taskbar.
-
-
-- Notes from the DOM:
-    - [DOM] Input elements should have autocomplete attributes (suggested: "new-password"): (More info: https://goo.gl/9p2vKq) <input aria-invalid=​"false" id=​":​r5:​" type=​"password" class=​"MuiInputBase-input MuiInput-input css-1x51dt5-MuiInputBase-input-MuiInput-input" value>​
-signup:1 
-
-    - [DOM] Input elements should have autocomplete attributes (suggested: "new-password"): (More info: https://goo.gl/9p2vKq) <input aria-invalid=​"false" id=​":​r7:​" type=​"password" class=​"MuiInputBase-input MuiInput-input css-1x51dt5-MuiInputBase-input-MuiInput-input" value>​
-signin:1 
-
-    - [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) <input aria-invalid=​"false" id=​"password-with-visibility-icon" type=​"password" class=​"MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input" value>​

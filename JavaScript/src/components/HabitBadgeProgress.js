@@ -2,10 +2,16 @@ import React from "react";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Paper, Typography, Popover,} from '@mui/material';
 import { Box } from "@mui/system";
+import { styled } from "@mui/material/styles";
 
 const HabitBadgeProgress = ({title, description, badgeMeta, streakLength, darkMode}) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     
+
+    const StyledTypography = styled(Typography)(({theme})=> ({
+        color: theme.palette.textFallback.offset
+    }));
+
     const handlePopoverOpen = (event) => {
       setAnchorEl(event.currentTarget);
     };
@@ -23,10 +29,9 @@ const HabitBadgeProgress = ({title, description, badgeMeta, streakLength, darkMo
             sx={{
                 backgroundColor: "primary.main",
                 alignItems: "center",
-                height: "1",
-                border: "1px solid #fafafa",
+                borderColor:"primary.dark",
         }}>
-            <Box sx={{borderBottom: 1, borderColor: "#fafafa"}}>
+            <Box sx={{borderBottom: "1px solid", borderColor:"primary.dark"}}>
                 <Typography sx={{
                     fontSize: '1.3rem',
                     color: "primary.contrastText", 
@@ -39,16 +44,14 @@ const HabitBadgeProgress = ({title, description, badgeMeta, streakLength, darkMo
             <Grid sx={{
                 height: "100%",
                 textAlign: "center",
-                justifyContent: "center",    
             }}>
                 <Box height="100%" width="100%" component="img" 
                     src={badgeMeta.imgUrl} 
                     onMouseEnter={handlePopoverOpen} 
                     onMouseLeave={handlePopoverClose} 
                     sx={{
-                        maxHeight: "140px",
-                        maxWidth: "200px",
-                        margin: "auto",
+                        height: "140px",
+                        width: "200px",
                         '&:hover': {
                             backgroundColor: 'overlay',
                             opacity: [0.95],
@@ -74,12 +77,11 @@ const HabitBadgeProgress = ({title, description, badgeMeta, streakLength, darkMo
             onClose={handlePopoverClose}
             disableRestoreFocus
             PaperProps={{sx:{
-                border:"1px solid",
-                borderColor:"#fafafa",
                 width: "200px",
                 backgroundColor: "primary.main",
-                color:"#fafafa",
-                textAlign:"center"
+                textAlign:"center",
+                border:"1px solid",
+                borderColor:"primary.dark"
             }}}
         >   
             <Box>
@@ -93,8 +95,10 @@ const HabitBadgeProgress = ({title, description, badgeMeta, streakLength, darkMo
                     fontSize: "1.2rem"
                 }}>{badgeMeta.rank}</Paper>
             </Box> 
-            <Box borderBottom="1px solid" borderColor="#fafafa" padding="10px" color="primary.contrastText" >{description}</Box>
-            <Box padding="10px" color="primary.contrastText">{streakLength}</Box>
+            <Box borderBottom="1px solid" borderColor="primary.dark" padding="10px">
+                <StyledTypography>{description}</StyledTypography>
+            </Box>
+            <Box padding="10px"><StyledTypography>{streakLength}</StyledTypography></Box>
         </Popover>
     </Grid>);
 };

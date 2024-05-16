@@ -22,8 +22,8 @@ const widthSubDivision = (numBadgesPerDivision - 1) / (subDivisions.length-1);
 
 const getBadgeNameAndURL = (score) => {                                                                                     //examples: 20 * scoreWeight | 143 * scoreWeight
   const weightedScore = score / scoreWeight > numBadges ? numBadges : Math.floor(score / scoreWeight);                      //  = 20 | 143
-  const subDivisionRank = weightedScore % numBadgesPerDivision;                                                             // = 20 | 17
   const division = divisions[Math.floor(weightedScore / numBadgesPerDivision)];                                             // = divisions[0] = {name:iron} | divisions[6] = {name:emerald}
+  const subDivisionRank = weightedScore % numBadgesPerDivision;                                                             // = 20 | 17
   const subDivision = subDivisions[Math.floor((endSubDivisions) * (1+subDivisionRank) / numBadgesPerDivision)];             // = subDivisions[2] | subDivisions[1]
   let rank =`${division.name} ${subDivision}`;                                                                              // = "Iron III." | "Emerald II. "
   rank += rank.includes(subDivisions[endSubDivisions]) ? `` : `${subDivisionRank % widthSubDivision}/${widthSubDivision}`;  // = "Iron III." | "Emerald II. 7/10"
@@ -31,7 +31,7 @@ const getBadgeNameAndURL = (score) => {                                         
     imgUrl: "/badgeicons/levelbadge" + weightedScore + ".png",
     rank: rank,
     color: division.color,
-    offColor: division.offColor
+    offColor: division.offColor,
   };
 }
 
@@ -48,7 +48,7 @@ const Badges = ({habits, darkMode, children}) => {
     backgroundPosition: "center",
   }}>
     {children}{/*Taskbar*/}
-    <Grid container justifyContent="center" alignItems="center" margin="0px" 
+    <Grid container sx={{justifyContent:"center", margin:"0px", paddingTop:"32px" }}
           rowSpacing={4}
           columnSpacing={8}
     >
@@ -58,7 +58,6 @@ const Badges = ({habits, darkMode, children}) => {
             description={habit.description}
             badgeMeta={getBadgeNameAndURL(habit.pointValue)}
             streakLength={getStreakMessage(habit.streak)}
-            score={habit.pointValue}
             darkMode={darkMode}
             key={habit.id}
           />

@@ -41,20 +41,16 @@ public class HabitsController {
 
     @GetMapping("")
     public ResponseEntity <List<Habit>> viewAllActiveHabits(@RequestHeader(value="Authorization") String authToken) {
-
         if (authToken == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
         Optional<User> userReference = userRepository.findByAuthToken(authToken);
-
         if (!userReference.isPresent()) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-
         User user = (User) userReference.get();
         List<Habit> activeHabits = habitRepository.findAllActiveHabits(user.getId());
         return ResponseEntity.ok().body(activeHabits);
-
     }
 
     @GetMapping("all")

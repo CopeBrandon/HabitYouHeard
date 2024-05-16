@@ -9,9 +9,6 @@ import com.habityouheard.habityouheard.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.MultiValueMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -174,4 +171,31 @@ public class HabitController {
         return new ResponseEntity(habit, HttpStatus.OK);
     }
 
+    @PatchMapping("{id}/description")
+    public ResponseEntity editDescription(@PathVariable(value= "id") int id, @RequestBody String description, @RequestHeader(value="Authorization") String authToken, Errors errors){
+        if(errors.hasErrors()) {
+            return new ResponseEntity<>(Map.of("error", errors.toString()), HttpStatus.BAD_REQUEST);
+        }
+        if(authToken == null){
+            return new ResponseEntity<>(Map.of("error", "Token is null."),HttpStatus.UNAUTHORIZED);
+        }
+        if(description.length() > 512){
+            return new ResponseEntity<>(Map.of("error", "Description must be less than 512 characters."), HttpStatus.BAD_REQUEST);
+        }
+        Optional<User> userReference = userRepository.findByAuthToken(authToken);
+        if(!userReference.isPresent()){
+            return new ResponseEntity<>(Map.of("error","No user with that token"), HttpStatus.UNAUTHORIZED);
+        }
+        User user = userReference.get();
+        List<Habit> habits = habitRepository.findHabitByUserAndId(user.getId(), id);
+        if(habits.size()!=1){
+            return new ResponseEntity<>(Map.of("error", "User/Habit mismatch"), HttpStatus.NOT_FOUND);
+        }
+
+        habitRepository.updateDescription(user.getId(), id, description);
+        Map<String, String> responseBody = new HashMap<>();
+        responseBody.put("message", "Description updated to: '" + description + "'.");
+        return new ResponseEntity<>(responseBody, HttpStatus.OK );
+    }
 }
+

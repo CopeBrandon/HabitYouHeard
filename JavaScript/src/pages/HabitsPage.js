@@ -4,7 +4,7 @@ import { ArrowBack, Add } from "@mui/icons-material";
 import { TextField, Typography, Box, Checkbox, Fab, FormControl, InputLabel, ListItemText, MenuItem, 
   OutlinedInput, Select, Stack} from '@mui/material';
 import Grid from "@mui/material/Unstable_Grid2";
-import AddHabit from "../components/AddHabit";
+import EditHabit from "../components/EditHabit";
 
 
 const days = [
@@ -17,12 +17,12 @@ const days = [
   "Saturday",
 ];
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
+// const ITEM_HEIGHT = 54; // Deprecated due to removal of maxHeight of menuprops.
+// const ITEM_PADDING_TOP = 8; // ditto. These are kept for record keeping as feature develops.
+// const MENU_ITEMS = 7 
 const MenuProps = {
   PaperProps: {
     style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
       width: 250,
     },
   },
@@ -144,13 +144,20 @@ export default function HabitsPage({ habits, setHabits, user }) {
         </Grid>
       </Grid>
 
-      <Grid container spacing={2} marginTop="20px" disableEqualOverflow="true">
+      {/* <Grid container spacing={2} marginTop="20px" disableEqualOverflow="true"> */}
+      <Grid container justifyContent="center" margin="0px" marginTop="16px"
+        rowSpacing={4}
+        columnSpacing={8}
+      >
         {habits.map((habit) => (
-          <Grid key={habit.id} xs={6} display="flex" justifyContent="center">
-            <AddHabit
+          <Grid key={habit.id} xs={10} md={6} lg={3.5} display="flex" justifyContent="center">
+            <EditHabit
+              user={user}
+              habits={habits}
+              setHabits={setHabits}
               habit={habit}
               buttonHandler={handleStopHabit}
-            ></AddHabit>
+            ></EditHabit>
           </Grid>
         ))}
       </Grid>
@@ -194,28 +201,26 @@ export default function HabitsPage({ habits, setHabits, user }) {
             }}
           />
 
-          <div>
-            <FormControl sx={{ m: 1, width: 150, marginBottom: "25px" }}>
-              <InputLabel id="multiple-checkbox-label">Day(s)</InputLabel>
-              <Select
-                labelId="multiple-checkbox-label"
-                id="multiple-checkbox"
-                multiple
-                value={daysOfTheWeek}
-                onChange={handleChange}
-                input={<OutlinedInput label="Tag" />}
-                renderValue={(selected) => selected.join(", ")}
-                MenuProps={MenuProps}
-              >
-                {days.map((day) => (
-                  <MenuItem key={day} value={day}>
-                    <Checkbox checked={daysOfTheWeek.indexOf(day) > -1} />
-                    <ListItemText primary={day} />
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
+          <FormControl sx={{ m: 1, width: 150, marginBottom: "25px" }}>
+            <InputLabel id="multiple-checkbox-label">Day(s)</InputLabel>
+            <Select
+              labelId="multiple-checkbox-label"
+              id="multiple-checkbox"
+              multiple
+              value={daysOfTheWeek}
+              onChange={handleChange}
+              input={<OutlinedInput label="Tag" />}
+              renderValue={(selected) => selected.join(", ")}
+              MenuProps={MenuProps}
+            >
+              {days.map((day) => (
+                <MenuItem key={day} value={day}>
+                  <Checkbox checked={daysOfTheWeek.indexOf(day) > -1} />
+                  <ListItemText primary={day} />
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
 
           <Fab type="submit" color="primary" onClick={handleCreateHabitFetch}>
             <Add/>

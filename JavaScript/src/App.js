@@ -42,7 +42,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(user));
     const fetchHabits = async () => {
-      if(user.token === "") return;
       fetch("http://localhost:8080/api/habits/", {
         headers: {
           Authorization: user.token,
@@ -55,6 +54,7 @@ function App() {
           setHabits(data.sort((a, b) => a.id - b.id));
         });
     };
+    setDarkMode(user.darkMode);
     fetchHabits();
   },
   [user]);
