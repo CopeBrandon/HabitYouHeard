@@ -34,7 +34,7 @@ export const darkTheme = {
     primary: colors.purples, 
     secondary: colors.blues,
     overlay: colors.purples.main,
-    textFallback: colors.darkText,
+    textFallback: colors.lightText,
     background: {
         default: colors.greys.dark,
         paper: colors.greys.main

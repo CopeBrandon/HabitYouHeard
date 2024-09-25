@@ -37,9 +37,12 @@ export default function SignInSide(props) {
       if (response.token) {
         setPasswordHelperText("");
         setUsernameHelperText("");
+        response.darkMode = response.darkMode === "true";
         props.setUser(response);
-
         props.setDarkMode(response.darkMode === "true");
+        //TODO: This is a bug, I think. I don't see why this code is working..?
+        // It might be because the useEffect is handling all of that anyways when it 
+        // calls back the user from the database onToggleTheme
 
         navigate("/");
       } else if (response.errorMessage) {

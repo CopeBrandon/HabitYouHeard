@@ -10,13 +10,9 @@ import { lightTheme, darkTheme } from "./palette/colors";
 function App() {
   const [user, setUser] = useState(localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {token: ""});
   const [habits, setHabits] = useState([]);
-  const [darkMode, setDarkMode] = useState(user.darkMode? user.darkMode : false);
+  const [darkMode, setDarkMode] = useState(user.darkMode);
   
-  const handleToggleTheme = (signout) => {
-    if(signout){
-      setDarkMode(false);
-      return;
-    }
+  const handleToggleTheme = () => {
       fetch(`http://localhost:8080/api/user/darkmode`, {
         method: "POST",
         headers: {
@@ -27,7 +23,9 @@ function App() {
         .then((res) => res.json())
         .then((data) => {
           user.darkMode = data;
-          setDarkMode(user.darkMode);
+          //TODO: Test whether useEffect can handle a lot of this considering we setUser..?
+          setUser(user);
+          setDarkMode(data);
           localStorage.setItem("user", JSON.stringify(user));
         }) 
   };
@@ -35,8 +33,8 @@ function App() {
   const theme = createTheme(({
     palette: {
       mode: darkMode ? "dark": "light",
-      ...(!darkMode
-        ? lightTheme : darkTheme)
+      ...(darkMode
+        ? darkTheme : lightTheme)
     }
   }));
   useEffect(() => {
@@ -54,8 +52,12 @@ function App() {
           setHabits(data.sort((a, b) => a.id - b.id));
         });
     };
-    setDarkMode(user.darkMode);
-    fetchHabits();
+    if(user.token !== ""){
+      setDarkMode(user.darkMode);
+      fetchHabits();
+    } else {
+      setDarkMode(false);
+    }
   },
   [user]);
 

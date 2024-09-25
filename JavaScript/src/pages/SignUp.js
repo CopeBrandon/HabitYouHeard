@@ -3,10 +3,6 @@ import { Stack, TextField } from "@mui/material/";
 import { useNavigate } from "react-router";
 import AuthLayout from "../components/layouts/AuthLayout";
 
-//import bcrypt from "bcryptjs";
-//const salt = bcrypt.genSaltSync(10); 
-//Not sure why salt exists but I'm leaving this here in case I need to use it somehow?
-
 const SignUp = () => {
   const [response, setResponse] = useState("");
   const [emailHelperText, setEmailHelperText] = useState("");

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import Grid from "@mui/material/Unstable_Grid2";
-import HabitBadgeProgress from '../components/HabitBadgeProgress';
+import Badge from '../components/Badge';
 
 const divisions = [
   {name:"Iron", color:"#a19d94", offColor:"#fafafa", id:0},
@@ -53,7 +53,7 @@ const Badges = ({habits, darkMode, children}) => {
           columnSpacing={8}
     >
       {habits.map((habit) => (
-          <HabitBadgeProgress
+          <Badge
             title={habit.name}
             description={habit.description}
             badgeMeta={getBadgeNameAndURL(habit.pointValue)}

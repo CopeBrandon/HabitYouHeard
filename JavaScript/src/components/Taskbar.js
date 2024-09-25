@@ -18,8 +18,7 @@ export default function Taskbar({darkMode, onToggleTheme, user, setUser, setHabi
     const navigate = useNavigate();
     const locationPath = useLocation().pathname;
     const handleSignout = () => {
-        setUser({token: ""})
-        onToggleTheme(true);
+        setUser({token: ""});
         setHabits([])
     }
     let bubbleContent, bubbleLink;
@@ -61,7 +60,7 @@ export default function Taskbar({darkMode, onToggleTheme, user, setUser, setHabi
                             alignItems: "center",
                         }}
                     >
-                        <Button onClick={()=>navigate(-1)}>
+                        <Link to={"/"} textDecoration="none">
                             <Box
                                 sx={{
                                     backgroundColor: "#fafafa",
@@ -75,7 +74,7 @@ export default function Taskbar({darkMode, onToggleTheme, user, setUser, setHabi
                             >
                                 <ArrowBack />
                             </Box>
-                        </Button>
+                        </Link>
                     </Paper>
                 }
             </Grid>

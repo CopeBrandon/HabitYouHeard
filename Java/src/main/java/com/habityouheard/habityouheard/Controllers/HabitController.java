@@ -1,5 +1,6 @@
 package com.habityouheard.habityouheard.controllers;
 
+import com.habityouheard.habityouheard.models.DTO.DaysWeek;
 import com.habityouheard.habityouheard.models.Habit;
 import com.habityouheard.habityouheard.models.HabitMeta;
 import com.habityouheard.habityouheard.models.User;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -196,6 +198,43 @@ public class HabitController {
         Map<String, String> responseBody = new HashMap<>();
         responseBody.put("message", "Description updated to: '" + description + "'.");
         return new ResponseEntity<>(responseBody, HttpStatus.OK );
+    }
+    //TODO: Need either a repository method or another way to update the selected_days table. The SQL query is gonna be a nightmare so I'm leaving that for tomorrow.
+    @PatchMapping("{id}/days")
+    public ResponseEntity editSelectedDays(@PathVariable(value="id") int id, @Valid @RequestBody DaysWeek daysWeek, @RequestHeader(value="Authorization") String authToken, Errors errors) throws IllegalAccessException {
+        if(errors.hasErrors()){
+            return new ResponseEntity<>(Map.of("error", errors.toString()), HttpStatus.BAD_REQUEST);
+        }
+        if(authToken == null){
+            return new ResponseEntity<>(Map.of("error", "Token is null"), HttpStatus.UNAUTHORIZED);
+        }
+        Optional<User> optUser = userRepository.findByAuthToken(authToken);
+        if(!optUser.isPresent()){
+            return new ResponseEntity<>(Map.of("error", "No user with that token"), HttpStatus.UNAUTHORIZED);
+        }
+
+        List<String> days = daysWeek.getDays();
+        List<String> daysWeekActual = List.of("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday");
+        for(int i=0; i<days.size(); i++){
+            if(!daysWeekActual.contains(days.get(i))){
+                return new ResponseEntity<>(Map.of("error", "Invalid day input."), HttpStatus.BAD_REQUEST);
+            }
+        }
+
+        Optional<Habit> optHabit = habitRepository.findById(id);
+        if(!optHabit.isPresent()){
+            return new ResponseEntity(Map.of("error", "Habit does not exist with that ID."), HttpStatus.BAD_REQUEST);
+        }
+        User user = optUser.get();
+        Habit habit = optHabit.get();
+        if(habit.getUser().getId() != user.getId()){
+            return new ResponseEntity(Map.of("error", "User is not authenticated to edit that habit."), HttpStatus.UNAUTHORIZED);
+        }
+
+        habit.setSelectedDays(days);
+        entityManager.persist(habit);
+        entityManager.flush();
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
 
